@@ -12308,52 +12308,52 @@ function RoClothes(Player)
 										PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 1
 									end
 									if PData.HPClothes.Shirt ~= "" and not tonumber(PData.HPClothes.Shirt) then
-										if not PData.HPClothes.Pants then
-											Function.ShirtTexture(PData.CurrentPartList["Organ"]["Torso"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
-										end
-									if PData.CurrentPartList["Organ"]["Left Arm"]:FindFirstChildOfClass("SurfaceAppearance") then
-										PData.CurrentPartList["Organ"]["Left Arm"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
-									end
-									if PData.CurrentPartList["Organ"]["Right Arm"]:FindFirstChildOfClass("SurfaceAppearance") then
-										PData.CurrentPartList["Organ"]["Right Arm"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
-									end
-									if PData.CurrentPartList["Clothes"]["Torso Shirt"] then
-										PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 0
-									end
-									if (not c:FindFirstChildOfClass("Pants") or not PData.HPClothes.Pants) and PData.CurrentPartList["Organ"]["Torso"]:FindFirstChildOfClass("SurfaceAppearance") then
-										PData.CurrentPartList["Organ"]["Torso"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
-									end
-									if c:FindFirstChildOfClass("Shirt") then
-										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Left Arm"],c,{Shirt = c:FindFirstChildOfClass("Shirt")},PlayerName)
-										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Right Arm"],c,{Shirt = c:FindFirstChildOfClass("Shirt")},PlayerName)
-									end
+										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Torso"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
 
-									if PData.CurrentPartList["Organ"]["Left Breast"] then
-										PData.CurrentPartList["Organ"]["Left Breast"].Transparency = 1
-										PData.CurrentPartList["Organ"]["Left Nipple"].Transparency = 1
-									end
-									if PData.CurrentPartList["Organ"]["Right Breast"] then
-										PData.CurrentPartList["Organ"]["Right Breast"].Transparency = 1
-										PData.CurrentPartList["Organ"]["Right Nipple"].Transparency = 1
-									end
-
-									for i, v in pairs(PData.CurrentPartList.AreolaDecal) do
-										if v.Name == "Left Breast" or v.Name == "Right Breast" then
-											i.Transparency = 1
-										else
-											i.Transparency = 0
+										if PData.CurrentPartList["Organ"]["Left Arm"]:FindFirstChildOfClass("SurfaceAppearance") then
+											PData.CurrentPartList["Organ"]["Left Arm"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
 										end
-									end
-									if PData.CurrentPartList["Clothes"]["Breasts Shirt"] then
-										PData.CurrentPartList["Clothes"]["Left Breast 2"].Transparency = 0
-										PData.CurrentPartList["Clothes"]["Right Breast 2"].Transparency = 0
-										PData.CurrentPartList["Clothes"]["Breasts Shirt"].Transparency = 0
-										PData.CurrentPartList["Clothes"]["Breasts Pants"].Transparency = 0
-									end
-									if PData.CurrentPartList["Clothes"]["Right Butt Shirt"] then
-										PData.CurrentPartList["Clothes"]["Left Butt Shirt"].Transparency = 0
-										PData.CurrentPartList["Clothes"]["Right Butt Shirt"].Transparency = 0
-									end
+										if PData.CurrentPartList["Organ"]["Right Arm"]:FindFirstChildOfClass("SurfaceAppearance") then
+											PData.CurrentPartList["Organ"]["Right Arm"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
+										end
+										if PData.CurrentPartList["Clothes"]["Torso Shirt"] then
+											PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 0
+										end
+										if (not c:FindFirstChildOfClass("Pants") or not PData.HPClothes.Pants) and PData.CurrentPartList["Organ"]["Torso"]:FindFirstChildOfClass("SurfaceAppearance") then
+											PData.CurrentPartList["Organ"]["Torso"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
+										end
+										if c:FindFirstChildOfClass("Shirt") then
+											Function.ShirtTexture(PData.CurrentPartList["Organ"]["Left Arm"],c,{Shirt = c:FindFirstChildOfClass("Shirt")},PlayerName)
+											Function.ShirtTexture(PData.CurrentPartList["Organ"]["Right Arm"],c,{Shirt = c:FindFirstChildOfClass("Shirt")},PlayerName)
+										end
+
+										if PData.CurrentPartList["Organ"]["Left Breast"] then
+											PData.CurrentPartList["Organ"]["Left Breast"].Transparency = 1
+											PData.CurrentPartList["Organ"]["Left Nipple"].Transparency = 1
+										end
+										if PData.CurrentPartList["Organ"]["Right Breast"] then
+											PData.CurrentPartList["Organ"]["Right Breast"].Transparency = 1
+											PData.CurrentPartList["Organ"]["Right Nipple"].Transparency = 1
+										end
+
+										for i, v in pairs(PData.CurrentPartList.AreolaDecal) do
+											if v.Name == "Left Breast" or v.Name == "Right Breast" then
+												i.Transparency = 1
+											else
+												i.Transparency = 0
+											end
+										end
+										if PData.CurrentPartList["Clothes"]["Breasts Shirt"] then
+											PData.CurrentPartList["Clothes"]["Left Breast 2"].Transparency = 0
+											PData.CurrentPartList["Clothes"]["Right Breast 2"].Transparency = 0
+											PData.CurrentPartList["Clothes"]["Breasts Shirt"].Transparency = 0
+											PData.CurrentPartList["Clothes"]["Breasts Pants"].Transparency = 0
+										end
+										if PData.CurrentPartList["Clothes"]["Right Butt Shirt"] then
+											PData.CurrentPartList["Clothes"]["Left Butt Shirt"].Transparency = 0
+											PData.CurrentPartList["Clothes"]["Right Butt Shirt"].Transparency = 0
+										end
+
 									else
 
 										if PData.CurrentPartList["Organ"]["Left Breast"] then
@@ -12375,14 +12375,15 @@ function RoClothes(Player)
 											PData.CurrentPartList["Clothes"]["Left Butt Shirt"].Transparency = 1
 											PData.CurrentPartList["Clothes"]["Right Butt Shirt"].Transparency = 1
 										end
-									end
-
-									for i, v in pairs(PData.CurrentPartList.AreolaDecal) do
-										if v.Name == "Left Breast" or v.Name == "Right Breast" then
-											i.Transparency = 0
-										else
-											i.Transparency = 1
+								
+										for i, v in pairs(PData.CurrentPartList.AreolaDecal) do
+											if v.Name == "Left Breast" or v.Name == "Right Breast" then
+												i.Transparency = 0
+											else
+												i.Transparency = 1
+											end
 										end
+
 									end
 
 								end
