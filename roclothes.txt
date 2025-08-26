@@ -12464,7 +12464,7 @@ function RoClothes(Player)
 										end
 									end
 									if PData.CurrentPartList["Clothes"]["Breasts Shirt"] then
-										Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["Breasts Shirt"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
+										Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["Breasts Shirt"],c,{Shirt = c:FindFirstChildOfClass("Shirt")},PlayerName)
 										PData.CurrentPartList["Clothes"]["Left Breast 2"].Transparency = 0
 										PData.CurrentPartList["Clothes"]["Right Breast 2"].Transparency = 0
 										PData.CurrentPartList["Clothes"]["Breasts Shirt"].Transparency = 0
