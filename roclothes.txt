@@ -12351,6 +12351,10 @@ function RoClothes(Player)
 											PData.CurrentPartList["Clothes"]["Left Butt Shirt"].Transparency = 0
 											PData.CurrentPartList["Clothes"]["Right Butt Shirt"].Transparency = 0
 										end
+
+										if PData.CurrentPartList["Clothes"]["Torso Shirt"] then
+											PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 0
+										end
 									else
 
 										if PData.CurrentPartList["Organ"]["Left Breast"] then
