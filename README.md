@@ -1,5 +1,5 @@
 # roclothestest 0.7.6*
-this is for roblox only n stuff yeah
+this is for roblox stuff okay
 
 *testing some stuff
 
