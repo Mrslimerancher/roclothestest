@@ -18,7 +18,7 @@ who's lerp again
 	
 	original version 0.7
 	local version 0.7.5:lerp()
-	]]
+]]
 
 
 
