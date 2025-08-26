@@ -12305,11 +12305,14 @@ function RoClothes(Player)
 										PData.CurrentPartList["Organ"]["Right Arm"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
 									end
 									if PData.CurrentPartList["Clothes"]["Torso Shirt"] then
-										PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 0
+										PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 1
 									end
 									if PData.HPClothes.Shirt ~= "" and not tonumber(PData.HPClothes.Shirt) then
+									if PData.CurrentPartList["Clothes"]["Torso Shirt"] then
+										PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 0
+									end
 										Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["Breasts Shirt"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
-										Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["TorsoShirtTexture"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
+										Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["Torso Shirt"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
 										if PData.CurrentPartList["Organ"]["Left Arm"]:FindFirstChildOfClass("SurfaceAppearance") then
 											PData.CurrentPartList["Organ"]["Left Arm"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
 										end
