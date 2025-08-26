@@ -1,7 +1,7 @@
 ﻿--[[	
 
 	/ ＲＯＣＬＯＴＨＥＳ
-	Version - 0.7.6?:lerp()
+	Version - 0.7.5.1?:lerp()
 who's lerp again
 	
 	| RoClothes is a Client-Sided Exploiting Script, that allows the player to have nude BodyParts/Clothes
