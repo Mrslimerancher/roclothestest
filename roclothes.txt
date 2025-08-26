@@ -12307,7 +12307,7 @@ function RoClothes(Player)
 									if PData.CurrentPartList["Clothes"]["Torso Shirt"] then
 										PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 1
 									end
-									if PData.HPClothes.Shirt ~= "" and tonumber(PData.HPClothes.Shirt) then
+									if PData.HPClothes.Shirt ~= "" and not tonumber(PData.HPClothes.Shirt) then
 										if not PData.HPClothes.Pants then
 											Function.ShirtTexture(PData.CurrentPartList["Organ"]["Torso"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
 										end
