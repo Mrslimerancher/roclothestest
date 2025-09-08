@@ -1,9 +1,9 @@
 ﻿--[[	
 
 	/ ＲＯＣＬＯＴＨＥＳ
-	Version - 0.7.6:lerp()
+	Version - 0.7.6.1:lerp()
 	Link - discord.gg/HBzvWE6Rp3
-	
+
 	| This script requires a LOCAL folder "RClothesContent" to be added in ROBLOX's content folder, or it'll self-destruct itself
 	
 	| RoClothes is a Client-Sided Exploiting Script, that allows the player to have nude BodyParts/Clothes
@@ -12930,9 +12930,8 @@ function RoClothes(Player)
 										transparent(PData.CurrentPartList["Clothes"]["Torso Shirt"],1)
 									end
 									if PData.HPClothes.Shirt ~= "" and not tonumber(PData.HPClothes.Shirt) then
-										if not PData.HPClothes.Pants then
-											Function.ShirtTexture(PData.CurrentPartList["Organ"]["Torso"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
-										end
+										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Torso"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
+
 										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Left Arm"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
 										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Right Arm"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
 									end
@@ -16963,4 +16962,5 @@ else
 		RoClothes(game.Players:WaitForChild("lerp()"))
 	end
 end
+
 return nil
