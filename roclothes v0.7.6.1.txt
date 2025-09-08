@@ -1,7 +1,7 @@
 --[[	
 
 	/ ＲＯＣＬＯＴＨＥＳ
-	Version - 0.7.6:lerp()
+	Version - 0.7.6.1:lerp()
 	Link - discord.gg/HBzvWE6Rp3
 	
 	| This script requires a LOCAL folder "RClothesContent" to be added in ROBLOX's content folder, or it'll self-destruct itself
@@ -650,7 +650,7 @@ function RoClothes(Player)
 
 	local R6Mesh = {
 		["TorsoMale"] = "rbxassetid://456901040",
-		["TorsoFemale"] = "rbxassetid://9747912904",
+		["TorsoFemale"] = "rbxassetid://48112070",
 		["Right Arm"] = "rbxassetid://5062992824",
 		["Left Arm"] = "rbxassetid://5062992824",
 		["Right Leg"] = "rbxassetid://5062992824",
@@ -13014,8 +13014,11 @@ function RoClothes(Player)
 										transparent(PData.CurrentPartList["Clothes"]["Torso Shirt"],1)
 									end
 									if PData.HPClothes.Shirt ~= "" and not tonumber(PData.HPClothes.Shirt) then
-										if not PData.HPClothes.Pants then
-											Function.ShirtTexture(PData.CurrentPartList["Organ"]["Torso"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
+										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Torso"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
+										Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["Breasts Shirt"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
+										Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["Torso Shirt"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
+										if PData.CurrentPartList["Clothes"]["Torso Shirt"] then
+											PData.CurrentPartList["Clothes"]["Torso Shirt"].Transparency = 0
 										end
 										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Left Arm"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
 										Function.ShirtTexture(PData.CurrentPartList["Organ"]["Right Arm"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
@@ -17048,3 +17051,4 @@ else
 	end
 end
 return nil
+
