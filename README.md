@@ -1,10 +1,7 @@
 # roclothestest 0.7.61*
 this is for roblox stuff okay
 
-*testing some stuff
-
-tried fixing the ripped shirt id part
-if this doesn't work then sorry
+*tried adding some QOL such as ripped shirt id working, and the thing below
 
 0.7.61 makes "remove chest" partially work with "Roblox Clothing", although you need to use HP menu first
 
