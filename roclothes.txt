@@ -1,8 +1,8 @@
 --[[	
 
 	/ ＲＯＣＬＯＴＨＥＳ
-	Version - 0.7.6.1:lerp()
-	Link - discord.gg/HBzvWE6Rp3
+	Version - 0.7.61:lerp()
+	Original - discord.gg/HBzvWE6Rp3
 	
 	| This script requires a LOCAL folder "RClothesContent" to be added in ROBLOX's content folder, or it'll self-destruct itself
 	
@@ -17139,3 +17139,4 @@ else
 	end
 end
 return nil
+
