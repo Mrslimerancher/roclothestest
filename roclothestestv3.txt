@@ -13519,7 +13519,7 @@ function RoClothes(Player)
 								end
 								if PData.CurrentPartList["Clothes"]["Torso Shirt"] then
 									transparent(PData.CurrentPartList["Clothes"]["Torso Shirt"],0)
-									Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["Breasts Shirt"],c,{Shirt = PData.HPClothes.Shirt},PlayerName)
+									Function.TorsoShirtTexture(PData.CurrentPartList["Clothes"]["Breasts Shirt"],c,{Shirt = c:FindFirstChildOfClass("Shirt")},PlayerName)
 								end
 								if (not c:FindFirstChildOfClass("Pants") or not PData.HPClothes.Pants) and PData.CurrentPartList["Organ"]["Torso"]:FindFirstChildOfClass("SurfaceAppearance") then
 									PData.CurrentPartList["Organ"]["Torso"]:FindFirstChildOfClass("SurfaceAppearance"):Destroy()
