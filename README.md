@@ -9,6 +9,6 @@ this is for roblox stuff okay
 
 it was also complicated to add the 0.7.51 stuff back to 0.7.61 
 
-v2 is a test one
+v3 is work in progress
 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/Mrslimerancher/roclothestest/main/roclothes.txt"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Mrslimerancher/roclothestest/main/roclothesv3.txt"))()
