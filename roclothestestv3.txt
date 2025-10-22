@@ -8193,17 +8193,13 @@ function RoClothes(Player)
 	local Bundle = {
 		["nil"] = "nil",
 		["Bald"] = {},
-		["Test2"] = {
+		["[0TEST2]"] = {
 			["Clothing"] = {
 				"Roblox Breasts Clothing",
 				"Roblox Shirt",
 				"Roblox Pants",
 			},
 			["Preset"] = {
-				HPClothes = {
-					Shirt = "94690012049470",
-					Pants = "6729166710",
-				},
 				Face = true,
 				BodyPartPhysics = true,
 				PhysicsObeyGravity = true,
@@ -8217,11 +8213,14 @@ function RoClothes(Player)
 				ArmType = 3,
 				LegsType = 4,
 				ButtType = 1,
+				Tone = "Dark",
 				HardcoreHP = true,
-				TopHP = 100,
-				BottomHP = 50,
+				HPClothes = {
+					Shirt = "94690012049470",
+					Pants = "6729166710",
+				},
 				DamageSFX = "1",
-				Volume = 1.2,
+				Volume = 1,
 			},
 			["IsPreset"] = true,
 		},
