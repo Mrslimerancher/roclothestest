@@ -13442,9 +13442,9 @@ function RoClothes(Player)
 
 									for i, v in pairs(PData.CurrentPartList.AreolaDecal) do
 										if v.Name == "Left Breast" or v.Name == "Right Breast" then
-											i.Transparency = 0
+											i.Transparency = 1
 										else
-											i.Transparency = 0
+											i.Transparency = 1
 										end
 									end
 									if PData.CurrentPartList["Clothes"]["Breasts Shirt"] then
