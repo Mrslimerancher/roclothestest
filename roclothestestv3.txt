@@ -8217,6 +8217,10 @@ function RoClothes(Player)
 				TorsoType = 7,
 				ArmType = 3,
 				LegsType = 4,
+				HPClothes = {
+					Shirt = "112939897351734",
+					Pants = "6729166710",
+				},
 				ButtType = 1,
 				Tone = "Dark",
 				TearParticles = true,
