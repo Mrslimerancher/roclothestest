@@ -1,7 +1,7 @@
 --[[	
 
 	/ ＲＯＣＬＯＴＨＥＳ
-	Version - 0.7.72:lerp()
+	Version - 0.7.71:lerp()
 	Link - discord.gg/HBzvWE6Rp3
 	
 	| This script requires a LOCAL folder "RClothesContent" to be added in ROBLOX's content folder, or it'll self-destruct itself
@@ -131,18 +131,18 @@ function RoClothes(Player)
 
 	local GUIObject = {}
 
-	GUIObject.BillboardHP = Instance.new("BillboardGui",Player.Character:FindFirstChildOfClass("Part"))
+	GUIObject.BillboardHP = Instance.new("BillboardGui",Player.Character:FindFirstChild("HumanoidRootPart"))
 
 	GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
 	GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
 	GUIObject.TopProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
 	GUIObject.BottomProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
-	
-	GUIObject.Particle = Instance.new("ParticleEmitter",Player.Character:FindFirstChildOfClass("Part"))
+
+	GUIObject.Particle = Instance.new("ParticleEmitter", Player.Character)
 	GUIObject.Particle.Enabled = false
-	
-	
-	
+
+
+
 	GUIObject.Screen = Instance.new("ScreenGui")
 	GUIObject.MainFrame = Instance.new("TextButton")
 
@@ -456,6 +456,7 @@ function RoClothes(Player)
 	GUIObject.UIGradient_A19 = Instance.new("UIGradient")
 	GUIObject.UICorner_A19 = Instance.new("UICorner")
 	GUIObject.HardcoreToggle = Instance.new("TextButton")
+	GUIObject.HPDisplayToggle = Instance.new("TextButton")
 
 	GUIObject.HatButton = Instance.new("ImageButton")
 
@@ -580,6 +581,7 @@ function RoClothes(Player)
 			Healing = false,
 			HealProgress = 0,
 			HardcoreHP = false,
+			DisplayHP = false,
 			TopHP = "",
 			BottomHP = "",
 			HPClothes = {
@@ -8242,6 +8244,7 @@ function RoClothes(Player)
 				TearParticles = true,
 				HealParticles = true,
 				HardcoreHP = true,
+				DisplayHP = true,
 				DamageSFX = 1,
 				Volume = 1,
 			},
@@ -11201,8 +11204,73 @@ function RoClothes(Player)
 								Weld.Part0 = v
 								Weld.Part1 = Part
 							end
+							GUIObject.Particle = Instance.new("ParticleEmitter",Character:FindFirstChildOfClass("Part"))
+							GUIObject.Particle.Enabled = false
+							GUIObject.Particle.Texture = "rbxassetid://16291625893"
+							GUIObject.Particle.LightEmission = 1
+							GUIObject.Particle.ZOffset = 1
+							GUIObject.Particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
+							GUIObject.Particle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
+							GUIObject.Particle.Lifetime = NumberRange.new(0.5,1)
+							GUIObject.Particle.Rotation = NumberRange.new(-10,10)
+							GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
+							GUIObject.Particle.Speed = NumberRange.new(-1,2)
+							GUIObject.Particle.Drag = 2
+
+							GUIObject.BillboardHP = Instance.new("BillboardGui")
+							GUIObject.BillboardHP.Parent = Character.Torso
+							GUIObject.BillboardHP.Enabled = PlayerData[Data].DisplayHP
+
+							GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
+							GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
+
+							GUIObject.TopProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
+							GUIObject.BottomProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
+							GUIObject.BottomProgress.Visible = false
+							GUIObject.TopProgress.Visible = false
+
+							GUIObject.BillboardHP.Size = UDim2.new(5,0,5,0)
+							GUIObject.BillboardHP.StudsOffset = Vector3.new(5,0,0)
+
+							GUIObject.TopLabel.Name = "TopLabel"
+							GUIObject.TopLabel.Text = "Top HP: nil"
+							GUIObject.TopLabel.Size = UDim2.new(1,0,0.25,0)
+							GUIObject.TopLabel.BackgroundTransparency = 1
+							GUIObject.TopLabel.TextStrokeTransparency = 0
+							GUIObject.TopLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+							GUIObject.TopLabel.TextColor3 = Color3.fromRGB(255,255,255)
+							GUIObject.TopLabel.TextScaled = true
+
+							GUIObject.BottomLabel.Name = "BottomLabel"
+							GUIObject.BottomLabel.Text = "Bottom HP: nil"
+							GUIObject.BottomLabel.Size = UDim2.new(1,0,0.25,0)
+							GUIObject.BottomLabel.Position = UDim2.new(0,0,0.25,0)
+							GUIObject.BottomLabel.BackgroundTransparency = 1
+							GUIObject.BottomLabel.TextStrokeTransparency = 0
+							GUIObject.BottomLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+							GUIObject.BottomLabel.TextColor3 = Color3.fromRGB(255,255,255)
+							GUIObject.BottomLabel.TextScaled = true
+
+							GUIObject.TopProgress.Name = "TopProgress"
+							GUIObject.TopProgress.Text = "Top Repair: 0%"
+							GUIObject.TopProgress.Size = UDim2.new(1,0,0.25,0)
+							GUIObject.TopProgress.Position = UDim2.new(0,0,0.5,0)
+							GUIObject.TopProgress.BackgroundTransparency = 1
+							GUIObject.TopProgress.TextStrokeTransparency = 0
+							GUIObject.TopProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+							GUIObject.TopProgress.TextColor3 = Color3.fromRGB(255,255,255)
+							GUIObject.TopProgress.TextScaled = true
+
+							GUIObject.BottomProgress.Name = "BottomProgress"
+							GUIObject.BottomProgress.Text = "Bottom Repair: 0%"
+							GUIObject.BottomProgress.Size = UDim2.new(1,0,0.25,0)
+							GUIObject.BottomProgress.Position = UDim2.new(0,0,0.75,0)
+							GUIObject.BottomProgress.BackgroundTransparency = 1
+							GUIObject.BottomProgress.TextStrokeTransparency = 0
+							GUIObject.BottomProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+							GUIObject.BottomProgress.TextColor3 = Color3.fromRGB(255,255,255)
+							GUIObject.BottomProgress.TextScaled = true
 						end
-						
 						GUIObject.Particle = Instance.new("ParticleEmitter",Character:FindFirstChildOfClass("Part"))
 						GUIObject.Particle.Enabled = false
 						GUIObject.Particle.Texture = "rbxassetid://16291625893"
@@ -11215,8 +11283,10 @@ function RoClothes(Player)
 						GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
 						GUIObject.Particle.Speed = NumberRange.new(-1,2)
 						GUIObject.Particle.Drag = 2
-						
-						GUIObject.BillboardHP = Instance.new("BillboardGui",Character:FindFirstChildOfClass("Part"))
+
+						GUIObject.BillboardHP = Instance.new("BillboardGui")
+						GUIObject.BillboardHP.Parent = Character
+						GUIObject.BillboardHP.Enabled = PlayerData[Data].DisplayHP
 
 						GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
 						GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
@@ -11225,7 +11295,7 @@ function RoClothes(Player)
 						GUIObject.BottomProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
 						GUIObject.BottomProgress.Enabled = false
 						GUIObject.TopProgress.Enabled = false
-						
+
 						GUIObject.BillboardHP.Size = UDim2.new(5,0,5,0)
 						GUIObject.BillboardHP.StudsOffset = Vector3.new(5,0,0)
 
@@ -11257,7 +11327,6 @@ function RoClothes(Player)
 						GUIObject.TopProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 						GUIObject.TopProgress.TextColor3 = Color3.fromRGB(255,255,255)
 						GUIObject.TopProgress.TextScaled = true
-						GUIObject.TopProgress.TextTransparency = 1
 
 						GUIObject.BottomProgress.Name = "BottomProgress"
 						GUIObject.BottomProgress.Text = "Bottom Repair: 0%"
@@ -11268,7 +11337,6 @@ function RoClothes(Player)
 						GUIObject.BottomProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
 						GUIObject.BottomProgress.TextColor3 = Color3.fromRGB(255,255,255)
 						GUIObject.BottomProgress.TextScaled = true
-						GUIObject.BottomProgress.TextTransparency = 1
 					end
 				end
 			elseif Method == 2 then
@@ -12031,7 +12099,8 @@ function RoClothes(Player)
 				PlayerData[ExecutePlayer.Name].OldestClothings.ShirtGraphic:Clone().Parent = ExecutePlayer.Character
 				PlayerData[ExecutePlayer.Name].OldestClothings.ShirtGraphic = nil
 			end
-
+			GUIObject.BillboardHP:Destroy()
+			GUIObject.Particle:Destroy()
 		end
 	end
 
@@ -12278,9 +12347,10 @@ function RoClothes(Player)
 							Weld.Part1 = Part
 						end
 					end
+
 				end
-				
-				GUIObject.Particle = Instance.new("ParticleEmitter",Character:FindFirstChildOfClass("Part"))
+
+				GUIObject.Particle = Instance.new("ParticleEmitter",Character.Torso)
 				GUIObject.Particle.Enabled = false
 				GUIObject.Particle.Texture = "rbxassetid://16291625893"
 				GUIObject.Particle.LightEmission = 1
@@ -12293,13 +12363,17 @@ function RoClothes(Player)
 				GUIObject.Particle.Speed = NumberRange.new(-1,2)
 				GUIObject.Particle.Drag = 2
 
-				GUIObject.BillboardHP = Instance.new("BillboardGui",Character:FindFirstChildOfClass("Part"))
+				GUIObject.BillboardHP = Instance.new("BillboardGui")
+				GUIObject.BillboardHP.Parent = Character
+				GUIObject.BillboardHP.Enabled = PlayerData[Data].DisplayHP
 
 				GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
 				GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
 
 				GUIObject.TopProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
 				GUIObject.BottomProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
+				GUIObject.BottomProgress.Visible = false
+				GUIObject.TopProgress.Visible = false
 
 				GUIObject.BillboardHP.Size = UDim2.new(5,0,5,0)
 				GUIObject.BillboardHP.StudsOffset = Vector3.new(5,0,0)
@@ -12356,7 +12430,7 @@ function RoClothes(Player)
 					OldCharacter:FindFirstChildOfClass("Pants"):Clone().Parent = Character
 				end
 			elseif Method == 1 then
-				GUIObject.Particle = Instance.new("ParticleEmitter",Player.Character:FindFirstChildOfClass("Part"))
+				GUIObject.Particle = Instance.new("ParticleEmitter",Player.Character.HumanoidRootPart)
 				GUIObject.Particle.Enabled = false
 				GUIObject.Particle.Texture = "rbxassetid://16291625893"
 				GUIObject.Particle.LightEmission = 1
@@ -12368,8 +12442,22 @@ function RoClothes(Player)
 				GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
 				GUIObject.Particle.Speed = NumberRange.new(-1,2)
 				GUIObject.Particle.Drag = 2
-				
-				GUIObject.BillboardHP = Instance.new("BillboardGui",Player.Character:FindFirstChildOfClass("Part"))
+
+				GUIObject.Particle = Instance.new("ParticleEmitter",Character.Torso)
+				GUIObject.Particle.Enabled = false
+				GUIObject.Particle.Texture = "rbxassetid://16291625893"
+				GUIObject.Particle.LightEmission = 1
+				GUIObject.Particle.ZOffset = 1
+				GUIObject.Particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
+				GUIObject.Particle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
+				GUIObject.Particle.Lifetime = NumberRange.new(0.5,1)
+				GUIObject.Particle.Rotation = NumberRange.new(-10,10)
+				GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
+				GUIObject.Particle.Speed = NumberRange.new(-1,2)
+				GUIObject.Particle.Drag = 2
+
+				GUIObject.BillboardHP = Instance.new("BillboardGui",Character:FindFirstChild("HumanoidRootPart"))
+				GUIObject.BillboardHP.Enabled = PlayerData[Data].DisplayHP
 
 				GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
 				GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
@@ -13088,6 +13176,12 @@ function RoClothes(Player)
 			GUIObject.HardcoreToggle.TextStrokeColor3 = Color3.new(255,0,0)
 		end
 
+		if PlayerData[SelectPlayer].DisplayHP then
+			GUIObject.HPDisplayToggle.TextStrokeColor3 = Color3.new(0,255,0)
+		else
+			GUIObject.HPDisplayToggle.TextStrokeColor3 = Color3.new(255,0,0)
+		end
+
 		GUIObject.PositionPhysicsMultiplyText.Text = PositionPhysicsMultiply
 		GUIObject.RotationPhysicsMultiplyText.Text = RotationPhysicsMultiply
 		GUIObject.MethodButton.Text = "Method: "..Method
@@ -13115,7 +13209,6 @@ function RoClothes(Player)
 		Function.CatalogAccessoryFrameAdd(SelectPlayer)
 		Function.MeshEditButton(GUIObject.MeshNameTextbox.Text)
 	end
-
 	function Function.FallenPartCheck(Object)
 		if Object:IsA("BasePart") then
 			return Object.Position.Y < game.Workspace.FallenPartsDestroyHeight
@@ -13212,7 +13305,7 @@ function RoClothes(Player)
 	local tap = false
 	local cd = false
 
-	
+
 
 	local UISBeganConnect = UIS.InputBegan:Connect(function(Keycode, Process)
 		if Process then return end
@@ -13241,10 +13334,10 @@ function RoClothes(Player)
 					if data["Healing"] == false then
 						data["Healing"] = true
 						GUIObject.Particle.Enabled = true
-						
-						GUIObject.BottomProgress.TextTransparency = 0
-						GUIObject.TopProgress.TextTransparency = 0
-						
+
+						GUIObject.BottomProgress.Visible = true
+						GUIObject.TopProgress.Visible = true
+
 						cd = true
 						tap = true
 						task.wait(.25)
@@ -13264,20 +13357,20 @@ function RoClothes(Player)
 								if LP.Character.Humanoid.Health < data["SavedPreviousHP"] then
 									data["Healing"] = false
 									GUIObject.Particle.Enabled = false
-									
-									GUIObject.BottomProgress.TextTransparency = 1
-									GUIObject.TopProgress.TextTransparency = 1
+
+									GUIObject.BottomProgress.Visible = false
+									GUIObject.TopProgress.Visible = false
 								end
 								local focus
 								local timeRequired
 								if data["BottomHP"] ~= "" and (data["SavedBottomHP"] <= 0 or data["SavedTopHP"]/data["TopHP"] >= data["SavedBottomHP"]/data["BottomHP"]) then
 									focus = "BottomHP"
 									timeRequired = (data["BottomHP"]/math.max(data["SavedBottomHP"],1))*0.03
-									GUIObject.BottomProgress.Text = "Bottom repair: " .. (timeAccumulated/timeRequired)*100 .. "%"
+									GUIObject.BottomProgress.Text = "Bottom repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
 								elseif data["TopHP"] ~= "" and (data["SavedTopHP"] <= 0 or data["SavedTopHP"]/data["TopHP"] < data["SavedBottomHP"]/data["BottomHP"]) then
 									focus = "TopHP"
 									timeRequired = (data["TopHP"]/math.max(data["SavedTopHP"],1))*0.03
-									GUIObject.TopProgress.Text = "Top repair: " .. (timeAccumulated/timeRequired)*100 .. "%"
+									GUIObject.TopProgress.Text = "Top repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
 								end
 								local t = task.wait()
 								timeAccumulated += t
@@ -13309,9 +13402,9 @@ function RoClothes(Player)
 				if data["Healing"] == true then
 					data["Healing"] = false
 					GUIObject.Particle.Enabled = false
-					
-					GUIObject.BottomProgress.TextTransparency = 1
-					GUIObject.TopProgress.TextTransparency = 1
+
+					GUIObject.BottomProgress.Visible = false
+					GUIObject.TopProgress.Visible = false
 					cd = true
 					task.delay(2, function()
 						cd = false
@@ -13943,11 +14036,28 @@ function RoClothes(Player)
 								end
 							end
 						end
-						
-						GUIObject.TopLabel.Text = "Top HP:" .. (PData.TopHP+h.MaxHealth)+PData.SavedPreviousHP .. "/" .. PData.TopHP
-						GUIObject.BottomLabel.Text = "Bottom HP:" ..(PData.BottomHP+h.MaxHealth)+PData.SavedPreviousHP .. "/" .. PData.BottomHP
-						
+
+						if PData.TopHP ~= "" then
+							if (h.MaxHealth-h.Health) >= PData.TopHP then
+								GUIObject.TopLabel.Text = "Top HP: 0/" .. PData.TopHP
+							else
+								GUIObject.TopLabel.Text = "Top HP: " .. PData.TopHP - (h.MaxHealth-h.Health) .. "/" .. PData.TopHP
+							end
+						else
+							GUIObject.TopLabel.Visible = false
+						end
+
+						if PData.BottomHP ~= "" then
+							if (h.MaxHealth-h.Health) >= PData.BottomHP then
+								GUIObject.BottomLabel.Text = "Bottom HP: 0/" .. PData.BottomHP
+							else
+								GUIObject.BottomLabel.Text = "Bottom HP: " .. PData.BottomHP - (h.MaxHealth-h.Health) .. "/" .. PData.BottomHP
+							end
+						else
+							GUIObject.BottomLabel.Visible = false
+						end
 						if (PData.SavedPreviousHP-h.Health) >= 0 and PData.HardcoreHP == true then
+
 							if PData.SavedTopHP - (PData.SavedPreviousHP-h.Health) > 0 then
 								PData.SavedTopHP -= (PData.SavedPreviousHP-h.Health)
 							else
@@ -15422,6 +15532,11 @@ function RoClothes(Player)
 			Function.GUIUpdate()
 		end)
 
+		local HPDisplayToggleConnect = GUIObject.HPDisplayToggle.MouseButton1Click:Connect(function()
+			PlayerData[SelectPlayer].DisplayHP = not PlayerData[SelectPlayer].DisplayHP
+			Function.GUIUpdate()
+		end)
+
 		table.insert(AllConnect, ExecuteConnect)
 		table.insert(AllConnect, ResetConnect)
 		table.insert(AllConnect, DelayTimeConnect)
@@ -15463,6 +15578,7 @@ function RoClothes(Player)
 		table.insert(AllConnect, TearToggleConnect)
 		table.insert(AllConnect, HealToggleConnect)
 		table.insert(AllConnect, HardcoreToggleConnect)
+		table.insert(AllConnect, HPDisplayToggleConnect)
 		table.insert(AllConnect, GravityConnect)
 	end
 
@@ -17651,8 +17767,8 @@ function RoClothes(Player)
 	GUIObject.HardcoreFrame.AnchorPoint = Vector2.new(0.5, 0)
 	GUIObject.HardcoreFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 	GUIObject.HardcoreFrame.BorderColor3 = Color3.fromRGB(0, 0, 0)
-	GUIObject.HardcoreFrame.Position = UDim2.new(0.5, 0, 0.705, 0)
-	GUIObject.HardcoreFrame.Size = UDim2.new(0.891309202, 0, 0.0646399707, 0)
+	GUIObject.HardcoreFrame.Position = UDim2.new(0.5, 0, 0.8, 0)
+	GUIObject.HardcoreFrame.Size = UDim2.new(0.891309202, 0, 0.12, 0)
 
 	GUIObject.UIGradient_A19.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(38, 10, 10)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(63, 19, 19))}
 	GUIObject.UIGradient_A19.Rotation = -90
@@ -17667,7 +17783,7 @@ function RoClothes(Player)
 	GUIObject.HardcoreToggle.BackgroundTransparency = 1.000
 	GUIObject.HardcoreToggle.BorderSizePixel = 0
 	GUIObject.HardcoreToggle.LayoutOrder = 1
-	GUIObject.HardcoreToggle.Size = UDim2.new(1, 0, 1, 0)
+	GUIObject.HardcoreToggle.Size = UDim2.new(1, 0, 0.5, 0)
 	GUIObject.HardcoreToggle.Font = Enum.Font.Code
 	GUIObject.HardcoreToggle.Text = "Clothing Hardcore HP"
 	GUIObject.HardcoreToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -17676,6 +17792,23 @@ function RoClothes(Player)
 	GUIObject.HardcoreToggle.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
 	GUIObject.HardcoreToggle.TextStrokeTransparency = 0.000
 	GUIObject.HardcoreToggle.TextWrapped = true
+
+	GUIObject.HPDisplayToggle.Name = "HPDisplayToggle"
+	GUIObject.HPDisplayToggle.Parent = GUIObject.HardcoreFrame
+	GUIObject.HPDisplayToggle.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+	GUIObject.HPDisplayToggle.BackgroundTransparency = 1.000
+	GUIObject.HPDisplayToggle.BorderSizePixel = 0
+	GUIObject.HPDisplayToggle.LayoutOrder = 1
+	GUIObject.HPDisplayToggle.Size = UDim2.new(1, 0, 0.5, 0)
+	GUIObject.HPDisplayToggle.Position = UDim2.new(0, 0, 0.5, 0)
+	GUIObject.HPDisplayToggle.Font = Enum.Font.Code
+	GUIObject.HPDisplayToggle.Text = "Display Clothing HP"
+	GUIObject.HPDisplayToggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+	GUIObject.HPDisplayToggle.TextScaled = true
+	GUIObject.HPDisplayToggle.TextSize = 14.000
+	GUIObject.HPDisplayToggle.TextStrokeColor3 = Color3.fromRGB(0, 255, 0)
+	GUIObject.HPDisplayToggle.TextStrokeTransparency = 0.000
+	GUIObject.HPDisplayToggle.TextWrapped = true
 
 	if not UIS.KeyboardEnabled then
 		GUIObject.MobileCloseButtonScreen.Enabled = true
@@ -17814,6 +17947,7 @@ function RoClothes(Player)
 				GUIObject.Screen:Destroy()
 				GUIObject.MobileCloseButtonScreen:Destroy()
 				BreakerObject:Destroy()
+				GUIObject.BillboardHP:Destroy()
 				warn("RoClothes Disconnected")
 				break
 			end
