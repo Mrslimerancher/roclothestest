@@ -14051,7 +14051,7 @@ function RoClothes(Player)
 							end
 							GUIObject.TopLabel.Text = "Top HP:" .. math.floor(PData.SavedTopHP) .. "/" .. PData.TopHP
 							GUIObject.BottomLabel.Text = "Bottom HP:" .. math.floor(PData.SavedBottomHP) .. "/" .. PData.BottomHP
-						else
+						elseif PData.HardcoreHP == false then
 							if PData.TopHP ~= "" then
 								if (h.MaxHealth-h.Health) >= PData.TopHP then
 									GUIObject.TopLabel.Text = "Top HP: 0 /" .. PData.TopHP
