@@ -14037,25 +14037,6 @@ function RoClothes(Player)
 							end
 						end
 
-						if PData.TopHP ~= "" then
-							if (h.MaxHealth-h.Health) >= PData.TopHP then
-								GUIObject.TopLabel.Text = "Top HP: 0/" .. PData.TopHP
-							else
-								GUIObject.TopLabel.Text = "Top HP: " .. PData.TopHP - (h.MaxHealth-h.Health) .. "/" .. PData.TopHP
-							end
-						else
-							GUIObject.TopLabel.Visible = false
-						end
-
-						if PData.BottomHP ~= "" then
-							if (h.MaxHealth-h.Health) >= PData.BottomHP then
-								GUIObject.BottomLabel.Text = "Bottom HP: 0/" .. PData.BottomHP
-							else
-								GUIObject.BottomLabel.Text = "Bottom HP: " .. PData.BottomHP - (h.MaxHealth-h.Health) .. "/" .. PData.BottomHP
-							end
-						else
-							GUIObject.BottomLabel.Visible = false
-						end
 						if (PData.SavedPreviousHP-h.Health) >= 0 and PData.HardcoreHP == true then
 
 							if PData.SavedTopHP - (PData.SavedPreviousHP-h.Health) > 0 then
@@ -14068,8 +14049,28 @@ function RoClothes(Player)
 							else
 								PData.SavedBottomHP = 0
 							end
-							GUIObject.TopLabel.Text = "Top HP:" .. PData.SavedTopHP .. "/" .. PData.TopHP
-							GUIObject.BottomLabel.Text = "Bottom HP:" .. PData.SavedBottomHP .. "/" .. PData.BottomHP
+							GUIObject.TopLabel.Text = "Top HP:" .. math.floor(PData.SavedTopHP) .. "/" .. PData.TopHP
+							GUIObject.BottomLabel.Text = "Bottom HP:" .. math.floor(PData.SavedBottomHP) .. "/" .. PData.BottomHP
+						else
+							if PData.TopHP ~= "" then
+								if (h.MaxHealth-h.Health) >= PData.TopHP then
+									GUIObject.TopLabel.Text = "Top HP: 0 /" .. PData.TopHP
+								else
+									GUIObject.TopLabel.Text = "Top HP: " .. math.floor(PData.TopHP - (h.MaxHealth-h.Health)) .. "/" .. PData.TopHP
+								end
+							else
+								GUIObject.TopLabel.Visible = false
+							end
+
+							if PData.BottomHP ~= "" then
+								if (h.MaxHealth-h.Health) >= PData.BottomHP then
+									GUIObject.BottomLabel.Text = "Bottom HP: 0/" .. PData.BottomHP
+								else
+									GUIObject.BottomLabel.Text = "Bottom HP: " .. math.floor(PData.BottomHP - (h.MaxHealth-h.Health)) .. "/" .. PData.BottomHP
+								end
+							else
+								GUIObject.BottomLabel.Visible = false
+							end
 						end
 						if PData.DamageSFX ~= "" and h.Health < PData.SavedPreviousHP then
 							if (PData.SavedPreviousHP-h.Health) >= tonumber(GUIObject.DamageSFX.Text) then
