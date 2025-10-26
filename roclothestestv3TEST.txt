@@ -475,7 +475,7 @@ function RoClothes(Player)
 	local TS = game:GetService("TweenService")
 	local MPS = game:GetService("MarketplaceService")
 
-	local CVersion = "0.7.7-2:lerp()"
+	local CVersion = "0.7.7:lerp()"
 
 	local Method = 2
 	local MaxMethod = 3
@@ -1996,8 +1996,8 @@ function RoClothes(Player)
 				["Instance"] = "Mesh",
 				["Name"] = "Torso Mesh",
 				["MeshId"] = "rbxassetid://9747912904",
-				["Size"] = Vector3.new(2.252163887023926, 2.240330934524536, 1.0990766286849976),
-				["CFrame"] = CFrame.new(0.0160980225, -0.10021019, -0.0673675537, 0.00548222661, -7.65554717e-07, -1, 1.38493746e-07, 1, -7.64807226e-07, 0, -1.34298816e-07, 0.00548222661),
+				["Size"] = Vector3.new(2, 2, 1),
+				["CFrame"] = CFrame.new(0, -0, -0.0, 0.005, -0, -1, 0, 1, -0, 0, -0, 0.005),
 				["Transparency"] = 0,
 				["Material"] = Enum.Material.SmoothPlastic,
 				["Color"] = {
@@ -8248,14 +8248,14 @@ function RoClothes(Player)
 				ButtsScale = 1,
 				LegsScale = 1,
 				BreastsType = 1,
-				TorsoType = 7,
+				TorsoType = 9,
 				ArmType = 3,
 				LegsType = 4,
 				TopHP = 100,
 				BottomHP = 50,
 				HPClothes = {
-					Shirt = "112939897351734",
-					Pants = "6729166710",
+					Shirt = "14653358073",
+					Pants = "12464125930",
 				},
 				ButtType = 1,
 				Tone = "Dark",
@@ -8288,7 +8288,7 @@ function RoClothes(Player)
 				ButtsScale = 1,
 				LegsScale = 1,
 				BreastsType = 1,
-				TorsoType = 7,
+				TorsoType = 9,
 				ArmType = 3,
 				LegsType = 4,
 				TopHP = 150,
