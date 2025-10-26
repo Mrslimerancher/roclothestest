@@ -475,13 +475,13 @@ function RoClothes(Player)
 	local TS = game:GetService("TweenService")
 	local MPS = game:GetService("MarketplaceService")
 
-	local CVersion = "0.7.7:lerp()"
+	local CVersion = "0.7.7-2:lerp()"
 
 	local Method = 2
 	local MaxMethod = 3
 
 	local MaxBreastsType = 4
-	local MaxTorsoType = 8
+	local MaxTorsoType = 9
 	local MaxArmType = 4
 	local MaxLegsType = 5
 	local MaxButtType = 3
@@ -1980,6 +1980,24 @@ function RoClothes(Player)
 				["MeshId"] = "rbxasset://RClothesContent/13085030579.mesh",
 				["Size"] = Vector3.new(1.0990766286849976, 2.240330934524536, 2.252163887023926),
 				["CFrame"] = CFrame.new(0.0160980225, -0.10021019, -0.0673675537, 0.00548222661, -7.65554717e-07, -0.999985158, 1.38493746e-07, 1, -7.64807226e-07, 0.999985158, -1.34298816e-07, 0.00548222661),
+				["Transparency"] = 0,
+				["Material"] = Enum.Material.SmoothPlastic,
+				["Color"] = {
+					["Tone"] = "Base",
+					["Color"] = "Parent"
+				},
+				["Parent"] = {
+					[1] = "Torso"
+				},
+				["ParentTransparency"] = 1,
+				["Function"] = "PantsTexture"
+			}, 
+			["Torso9"] = {
+				["Instance"] = "Mesh",
+				["Name"] = "Torso Mesh",
+				["MeshId"] = "rbxassetid://9747912904",
+				["Size"] = Vector3.new(2.252163887023926, 2.240330934524536, 1.0990766286849976),
+				["CFrame"] = CFrame.new(0.0160980225, -0.10021019, -0.0673675537, 0.00548222661, -7.65554717e-07, -1, 1.38493746e-07, 1, -7.64807226e-07, 0, -1.34298816e-07, 0.00548222661),
 				["Transparency"] = 0,
 				["Material"] = Enum.Material.SmoothPlastic,
 				["Color"] = {
@@ -8238,6 +8256,51 @@ function RoClothes(Player)
 				HPClothes = {
 					Shirt = "112939897351734",
 					Pants = "6729166710",
+				},
+				ButtType = 1,
+				Tone = "Dark",
+				TearParticles = true,
+				HealParticles = true,
+				HardcoreHP = true,
+				DisplayHP = true,
+				DamageSFX = 1,
+				Volume = 1,
+			},
+			["IsPreset"] = true,
+		},["[0TEST3]"] = {
+			["Clothing"] = {
+				"Roblox Breasts Clothing",
+				"Roblox Butt Shirt",
+				"Roblox Shirt",
+				"Roblox Pants",
+			},
+			["TClothes"] = {
+				["Shirt"] = 112939897351734,
+				["Pants"] = 6729166710,
+			},
+			["Preset"] = {
+				Face = true,
+				BodyPartPhysics = true,
+				PhysicsObeyGravity = true,
+				PositionPhysicsMultiply = 0.75,
+				RotationPhysicsMultiply = 3,
+				BreastsScale = 1.2,
+				ButtsScale = 1,
+				LegsScale = 1,
+				BreastsType = 1,
+				TorsoType = 7,
+				ArmType = 3,
+				LegsType = 4,
+				TopHP = 150,
+				BottomHP = 100,
+				CatalogClothes = {
+					Shirt = "10235767371",
+					Pants = "",
+					ShirtGraphic = "",
+				},
+				HPClothes = {
+					Shirt = "14653358073",
+					Pants = "12464125930",
 				},
 				ButtType = 1,
 				Tone = "Dark",
