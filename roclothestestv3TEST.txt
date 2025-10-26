@@ -8227,7 +8227,7 @@ function RoClothes(Player)
 	local Bundle = {
 		["nil"] = "nil",
 		["Bald"] = {},
-		["[0TEST2]"] = {
+		["TEST2"] = {
 			["Clothing"] = {
 				"Roblox Breasts Clothing",
 				"Roblox Butt Shirt",
@@ -8267,7 +8267,8 @@ function RoClothes(Player)
 				Volume = 1,
 			},
 			["IsPreset"] = true,
-		},["[0TEST3]"] = {
+		},
+		["TEST3"] = {
 			["Clothing"] = {
 				"Roblox Breasts Clothing",
 				"Roblox Butt Shirt",
@@ -8301,6 +8302,48 @@ function RoClothes(Player)
 				HPClothes = {
 					Shirt = "14653358073",
 					Pants = "12464125930",
+				},
+				ButtType = 1,
+				Tone = "Dark",
+				TearParticles = true,
+				HealParticles = true,
+				HardcoreHP = true,
+				DisplayHP = true,
+				DamageSFX = 1,
+				Volume = 1,
+			},
+			["IsPreset"] = true,
+		},
+		["TEST4"] = {
+			["Clothing"] = {
+				"Roblox Breasts Clothing",
+				"Roblox Butt Shirt",
+				"Roblox Shirt",
+				"Roblox Pants",
+			},
+			["TClothes"] = {
+				["Shirt"] = 112939897351734,
+				["Pants"] = 6729166710,
+			},
+			["Preset"] = {
+				Face = true,
+				BodyPartPhysics = true,
+				PhysicsObeyGravity = true,
+				PositionPhysicsMultiply = 0.75,
+				RotationPhysicsMultiply = 3,
+				BreastsScale = 1.2,
+				ButtsScale = 1,
+				LegsScale = 1,
+				BreastsType = 1,
+				TorsoType = 9,
+				ArmType = 3,
+				LegsType = 4,
+				TopHP = 350,
+				BottomHP = 250,
+				CatalogClothes = {
+					Shirt = "14653358073",
+					Pants = "12464125930",
+					ShirtGraphic = "",
 				},
 				ButtType = 1,
 				Tone = "Dark",
@@ -13410,6 +13453,21 @@ function RoClothes(Player)
 							local healTime = 0
 							local timeAccumulated = 0
 							local totalTime = 0
+							
+							
+							if data["SavedTopHP"] >= data["TopHP"] then
+								GUIObject.TopProgress.Text = "Top is fixed!"
+							else	
+								GUIObject.TopProgress.Text = "Waiting for repair..."
+							end
+							
+							if data["SavedBottomHP"] >= data["BottomHP"] then
+								GUIObject.BottomProgress.Text = "Bottom is fixed!"
+							else	
+								GUIObject.BottomProgress.Text = "Waiting for repair..."
+							end
+							
+							
 							if data["TopHP"] ~= "" then
 								healTime += (data["TopHP"]/math.max(data["SavedTopHP"],1))*0.03
 							end
@@ -13428,11 +13486,11 @@ function RoClothes(Player)
 								local timeRequired
 								if data["BottomHP"] ~= "" and (data["SavedBottomHP"] <= 0 or data["SavedTopHP"]/data["TopHP"] >= data["SavedBottomHP"]/data["BottomHP"]) then
 									focus = "BottomHP"
-									timeRequired = (data["BottomHP"]/math.max(data["SavedBottomHP"],1))*0.03
+									timeRequired = (data["BottomHP"]-data["SavedBottomHP"])*0.03
 									GUIObject.BottomProgress.Text = "Bottom repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
 								elseif data["TopHP"] ~= "" and (data["SavedTopHP"] <= 0 or data["SavedTopHP"]/data["TopHP"] < data["SavedBottomHP"]/data["BottomHP"]) then
 									focus = "TopHP"
-									timeRequired = (data["TopHP"]/math.max(data["SavedTopHP"],1))*0.03
+									timeRequired = (data["TopHP"]-data["SavedTopHP"])*0.03
 									GUIObject.TopProgress.Text = "Top repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
 								end
 								local t = task.wait()
@@ -13443,8 +13501,10 @@ function RoClothes(Player)
 									timeAccumulated = 0
 									if focus == "TopHP" then
 										data["SavedTopHP"]=data["TopHP"]
+										GUIObject.TopProgress.Text = "Top repaired!" 
 									else
 										data["SavedBottomHP"]=data["BottomHP"]
+										GUIObject.BottomProgress.Text = "Bottom repaired!"
 									end
 								end
 							until data["Healing"] == false
