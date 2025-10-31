@@ -6,7 +6,8 @@
 	
 	| This script requires a LOCAL folder "RClothesContent" to be added in ROBLOX's content folder, or it'll self-destruct itself
 	
-	| RoClothes is a Client-Sided Exploiting Script, that allows the player to have nude BodyParts/Clothes
+	| RoClothes is a Client-Sided Exploiting Script, that allows t
+	he player to have nude BodyParts/Clothes
 	Can be used on any executor
 	
 	| This script WILL cause FPS drops, because of BodyParts/Clothes meshes inside the Player model
@@ -131,7 +132,10 @@ function RoClothes(Player)
 
 	local GUIObject = {}
 
-	GUIObject.BillboardHP = Instance.new("BillboardGui",Player.Character:FindFirstChild("HumanoidRootPart"))
+	GUIObject.BillboardHP = Instance.new("BillboardGui")
+	GUIObject.BillboardHP.Size = UDim2.new(5,0,5,0)
+	GUIObject.BillboardHP.StudsOffset = Vector3.new(5,0,0)
+	GUIObject.BillboardHP.Enabled = false
 
 	GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
 	GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
@@ -8227,7 +8231,7 @@ function RoClothes(Player)
 	local Bundle = {
 		["nil"] = "nil",
 		["Bald"] = {},
-		["TEST2"] = {
+		["[0TEST2]"] = {
 			["Clothing"] = {
 				"Roblox Breasts Clothing",
 				"Roblox Butt Shirt",
@@ -8268,7 +8272,7 @@ function RoClothes(Player)
 			},
 			["IsPreset"] = true,
 		},
-		["TEST3"] = {
+		["[0TEST3]"] = {
 			["Clothing"] = {
 				"Roblox Breasts Clothing",
 				"Roblox Butt Shirt",
@@ -8295,7 +8299,7 @@ function RoClothes(Player)
 				TopHP = 150,
 				BottomHP = 100,
 				CatalogClothes = {
-					Shirt = "10235767371",
+					Shirt = "",
 					Pants = "",
 					ShirtGraphic = "",
 				},
@@ -8314,7 +8318,7 @@ function RoClothes(Player)
 			},
 			["IsPreset"] = true,
 		},
-		["TEST4"] = {
+		["[0TEST4]"] = {
 			["Clothing"] = {
 				"Roblox Breasts Clothing",
 				"Roblox Butt Shirt",
@@ -8338,8 +8342,8 @@ function RoClothes(Player)
 				TorsoType = 9,
 				ArmType = 3,
 				LegsType = 4,
-				TopHP = 350,
-				BottomHP = 250,
+				TopHP = 75,
+				BottomHP = 50,
 				CatalogClothes = {
 					Shirt = "14653358073",
 					Pants = "12464125930",
@@ -11276,6 +11280,8 @@ function RoClothes(Player)
 
 			local OldCharacter
 			if Method == 3 then
+				
+				
 				if BodyPart and PlayerData[Data].LocalTransparency[BodyPart.Name] == true then
 					OldCharacter = Character
 
@@ -11310,139 +11316,167 @@ function RoClothes(Player)
 								Weld.Part0 = v
 								Weld.Part1 = Part
 							end
-							GUIObject.Particle = Instance.new("ParticleEmitter",Character:FindFirstChildOfClass("Part"))
-							GUIObject.Particle.Enabled = false
-							GUIObject.Particle.Texture = "rbxassetid://16291625893"
-							GUIObject.Particle.LightEmission = 1
-							GUIObject.Particle.ZOffset = 1
-							GUIObject.Particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
-							GUIObject.Particle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
-							GUIObject.Particle.Lifetime = NumberRange.new(0.5,1)
-							GUIObject.Particle.Rotation = NumberRange.new(-10,10)
-							GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
-							GUIObject.Particle.Speed = NumberRange.new(-1,2)
-							GUIObject.Particle.Drag = 2
+							
+							if Character.Torso:FindFirstChild("BillboardHP") then
+								Character.Torso.BillboardHP:Destroy()
+							end
+							if Character.Torso:FindFirstChild("ParticleEmitter") then
+								Character.Torso.ParticleEmitter:Destroy()
+							end
 
-							GUIObject.BillboardHP = Instance.new("BillboardGui")
-							GUIObject.BillboardHP.Parent = Character.Torso
-							GUIObject.BillboardHP.Enabled = PlayerData[Data].DisplayHP
 
-							GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
-							GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
+							local CloneParticle = GUIObject.Particle:Clone()
+							CloneParticle.Parent = Character.Torso
+							CloneParticle.Enabled = false
+							CloneParticle.Texture = "rbxassetid://16291625893"
+							CloneParticle.LightEmission = 1
+							CloneParticle.ZOffset = 1
+							CloneParticle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
+							CloneParticle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
+							CloneParticle.Lifetime = NumberRange.new(0.5,1)
+							CloneParticle.Rotation = NumberRange.new(-10,10)
+							CloneParticle.RotSpeed = NumberRange.new(-10,10)
+							CloneParticle.Speed = NumberRange.new(-1,2)
+							CloneParticle.Drag = 2
 
-							GUIObject.TopProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
-							GUIObject.BottomProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
-							GUIObject.BottomProgress.Visible = false
-							GUIObject.TopProgress.Visible = false
+							local BillboardClone = GUIObject.BillboardHP:Clone()
+							BillboardClone.Parent = Character.Torso
+							BillboardClone.Enabled = PlayerData[Data].DisplayHP
+							BillboardClone.Name = "BillboardHP"
+							BillboardClone.StudsOffset = Vector3.new(5,0,0)
 
-							GUIObject.BillboardHP.Size = UDim2.new(5,0,5,0)
-							GUIObject.BillboardHP.StudsOffset = Vector3.new(5,0,0)
+							local TopLabelClone = GUIObject.TopLabel:Clone()
+							local BottomLabelClone = GUIObject.BottomLabel:Clone()
+							local TopProgressClone = GUIObject.TopProgress:Clone()
+							local BottomProgressClone = GUIObject.BottomProgress:Clone()
 
-							GUIObject.TopLabel.Name = "TopLabel"
-							GUIObject.TopLabel.Text = "Top HP: nil"
-							GUIObject.TopLabel.Size = UDim2.new(1,0,0.25,0)
-							GUIObject.TopLabel.BackgroundTransparency = 1
-							GUIObject.TopLabel.TextStrokeTransparency = 0
-							GUIObject.TopLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-							GUIObject.TopLabel.TextColor3 = Color3.fromRGB(255,255,255)
-							GUIObject.TopLabel.TextScaled = true
+							TopLabelClone.Parent = BillboardClone
+							BottomLabelClone.Parent = BillboardClone
 
-							GUIObject.BottomLabel.Name = "BottomLabel"
-							GUIObject.BottomLabel.Text = "Bottom HP: nil"
-							GUIObject.BottomLabel.Size = UDim2.new(1,0,0.25,0)
-							GUIObject.BottomLabel.Position = UDim2.new(0,0,0.25,0)
-							GUIObject.BottomLabel.BackgroundTransparency = 1
-							GUIObject.BottomLabel.TextStrokeTransparency = 0
-							GUIObject.BottomLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-							GUIObject.BottomLabel.TextColor3 = Color3.fromRGB(255,255,255)
-							GUIObject.BottomLabel.TextScaled = true
+							TopProgressClone.Parent = BillboardClone
+							BottomProgressClone.Parent = BillboardClone
+							TopProgressClone.Visible = false
+							BottomProgressClone.Visible = false
 
-							GUIObject.TopProgress.Name = "TopProgress"
-							GUIObject.TopProgress.Text = "Top Repair: 0%"
-							GUIObject.TopProgress.Size = UDim2.new(1,0,0.25,0)
-							GUIObject.TopProgress.Position = UDim2.new(0,0,0.5,0)
-							GUIObject.TopProgress.BackgroundTransparency = 1
-							GUIObject.TopProgress.TextStrokeTransparency = 0
-							GUIObject.TopProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-							GUIObject.TopProgress.TextColor3 = Color3.fromRGB(255,255,255)
-							GUIObject.TopProgress.TextScaled = true
+							TopLabelClone.Name = "TopLabel"
+							TopLabelClone.Text = "Top HP: nil"
+							TopLabelClone.Size = UDim2.new(1,0,0.25,0)
+							TopLabelClone.BackgroundTransparency = 1
+							TopLabelClone.TextStrokeTransparency = 0
+							TopLabelClone.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+							TopLabelClone.TextColor3 = Color3.fromRGB(255,255,255)
+							TopLabelClone.TextScaled = true
 
-							GUIObject.BottomProgress.Name = "BottomProgress"
-							GUIObject.BottomProgress.Text = "Bottom Repair: 0%"
-							GUIObject.BottomProgress.Size = UDim2.new(1,0,0.25,0)
-							GUIObject.BottomProgress.Position = UDim2.new(0,0,0.75,0)
-							GUIObject.BottomProgress.BackgroundTransparency = 1
-							GUIObject.BottomProgress.TextStrokeTransparency = 0
-							GUIObject.BottomProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-							GUIObject.BottomProgress.TextColor3 = Color3.fromRGB(255,255,255)
-							GUIObject.BottomProgress.TextScaled = true
+							BottomLabelClone.Name = "BottomLabel"
+							BottomLabelClone.Text = "Bottom HP: nil"
+							BottomLabelClone.Size = UDim2.new(1,0,0.25,0)
+							BottomLabelClone.Position = UDim2.new(0,0,0.25,0)
+							BottomLabelClone.BackgroundTransparency = 1
+							BottomLabelClone.TextStrokeTransparency = 0
+							BottomLabelClone.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+							BottomLabelClone.TextColor3 = Color3.fromRGB(255,255,255)
+							BottomLabelClone.TextScaled = true
+
+							TopProgressClone.Name = "TopProgress"
+							TopProgressClone.Text = "Top Repair: 0%"
+							TopProgressClone.Size = UDim2.new(1,0,0.25,0)
+							TopProgressClone.Position = UDim2.new(0,0,0.5,0)
+							TopProgressClone.BackgroundTransparency = 1
+							TopProgressClone.TextStrokeTransparency = 0
+							TopProgressClone.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+							TopProgressClone.TextColor3 = Color3.fromRGB(255,255,255)
+							TopProgressClone.TextScaled = true
+
+							BottomProgressClone.Name = "BottomProgress"
+							BottomProgressClone.Text = "Bottom Repair: 0%"
+							BottomProgressClone.Size = UDim2.new(1,0,0.25,0)
+							BottomProgressClone.Position = UDim2.new(0,0,0.75,0)
+							BottomProgressClone.BackgroundTransparency = 1
+							BottomProgressClone.TextStrokeTransparency = 0
+							BottomProgressClone.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+							BottomProgressClone.TextColor3 = Color3.fromRGB(255,255,255)
+							BottomProgressClone.TextScaled = true
 						end
-						GUIObject.Particle = Instance.new("ParticleEmitter",Character:FindFirstChildOfClass("Part"))
-						GUIObject.Particle.Enabled = false
-						GUIObject.Particle.Texture = "rbxassetid://16291625893"
-						GUIObject.Particle.LightEmission = 1
-						GUIObject.Particle.ZOffset = 1
-						GUIObject.Particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
-						GUIObject.Particle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
-						GUIObject.Particle.Lifetime = NumberRange.new(0.5,1)
-						GUIObject.Particle.Rotation = NumberRange.new(-10,10)
-						GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
-						GUIObject.Particle.Speed = NumberRange.new(-1,2)
-						GUIObject.Particle.Drag = 2
+						
+						if Character.Torso:FindFirstChild("BillboardHP") then
+							Character.Torso.BillboardHP:Destroy()
+						end
+						if Character.Torso:FindFirstChild("ParticleEmitter") then
+							Character.Torso.ParticleEmitter:Destroy()
+						end
 
-						GUIObject.BillboardHP = Instance.new("BillboardGui")
-						GUIObject.BillboardHP.Parent = Character
-						GUIObject.BillboardHP.Enabled = PlayerData[Data].DisplayHP
 
-						GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
-						GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
+						local CloneParticle = GUIObject.Particle:Clone()
+						CloneParticle.Parent = Character.Torso
+						CloneParticle.Enabled = false
+						CloneParticle.Texture = "rbxassetid://16291625893"
+						CloneParticle.LightEmission = 1
+						CloneParticle.ZOffset = 1
+						CloneParticle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
+						CloneParticle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
+						CloneParticle.Lifetime = NumberRange.new(0.5,1)
+						CloneParticle.Rotation = NumberRange.new(-10,10)
+						CloneParticle.RotSpeed = NumberRange.new(-10,10)
+						CloneParticle.Speed = NumberRange.new(-1,2)
+						CloneParticle.Drag = 2
 
-						GUIObject.TopProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
-						GUIObject.BottomProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
-						GUIObject.BottomProgress.Enabled = false
-						GUIObject.TopProgress.Enabled = false
+						local BillboardClone = GUIObject.BillboardHP:Clone()
+						BillboardClone.Parent = Character.Torso
+						BillboardClone.Enabled = PlayerData[Data].DisplayHP
+						BillboardClone.Name = "BillboardHP"
+						BillboardClone.StudsOffset = Vector3.new(5,0,0)
 
-						GUIObject.BillboardHP.Size = UDim2.new(5,0,5,0)
-						GUIObject.BillboardHP.StudsOffset = Vector3.new(5,0,0)
+						local TopLabelClone = GUIObject.TopLabel:Clone()
+						local BottomLabelClone = GUIObject.BottomLabel:Clone()
+						local TopProgressClone = GUIObject.TopProgress:Clone()
+						local BottomProgressClone = GUIObject.BottomProgress:Clone()
 
-						GUIObject.TopLabel.Name = "TopLabel"
-						GUIObject.TopLabel.Text = "Top HP: nil"
-						GUIObject.TopLabel.Size = UDim2.new(1,0,0.25,0)
-						GUIObject.TopLabel.BackgroundTransparency = 1
-						GUIObject.TopLabel.TextStrokeTransparency = 0
-						GUIObject.TopLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-						GUIObject.TopLabel.TextColor3 = Color3.fromRGB(255,255,255)
-						GUIObject.TopLabel.TextScaled = true
+						TopLabelClone.Parent = BillboardClone
+						BottomLabelClone.Parent = BillboardClone
 
-						GUIObject.BottomLabel.Name = "BottomLabel"
-						GUIObject.BottomLabel.Text = "Bottom HP: nil"
-						GUIObject.BottomLabel.Size = UDim2.new(1,0,0.25,0)
-						GUIObject.BottomLabel.Position = UDim2.new(0,0,0.25,0)
-						GUIObject.BottomLabel.BackgroundTransparency = 1
-						GUIObject.BottomLabel.TextStrokeTransparency = 0
-						GUIObject.BottomLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-						GUIObject.BottomLabel.TextColor3 = Color3.fromRGB(255,255,255)
-						GUIObject.BottomLabel.TextScaled = true
+						TopProgressClone.Parent = BillboardClone
+						BottomProgressClone.Parent = BillboardClone
+						TopProgressClone.Visible = false
+						BottomProgressClone.Visible = false
 
-						GUIObject.TopProgress.Name = "TopProgress"
-						GUIObject.TopProgress.Text = "Top Repair: 0%"
-						GUIObject.TopProgress.Size = UDim2.new(1,0,0.25,0)
-						GUIObject.TopProgress.Position = UDim2.new(0,0,0.5,0)
-						GUIObject.TopProgress.BackgroundTransparency = 1
-						GUIObject.TopProgress.TextStrokeTransparency = 0
-						GUIObject.TopProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-						GUIObject.TopProgress.TextColor3 = Color3.fromRGB(255,255,255)
-						GUIObject.TopProgress.TextScaled = true
+						TopLabelClone.Name = "TopLabel"
+						TopLabelClone.Text = "Top HP: nil"
+						TopLabelClone.Size = UDim2.new(1,0,0.25,0)
+						TopLabelClone.BackgroundTransparency = 1
+						TopLabelClone.TextStrokeTransparency = 0
+						TopLabelClone.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+						TopLabelClone.TextColor3 = Color3.fromRGB(255,255,255)
+						TopLabelClone.TextScaled = true
 
-						GUIObject.BottomProgress.Name = "BottomProgress"
-						GUIObject.BottomProgress.Text = "Bottom Repair: 0%"
-						GUIObject.BottomProgress.Size = UDim2.new(1,0,0.25,0)
-						GUIObject.BottomProgress.Position = UDim2.new(0,0,0.75,0)
-						GUIObject.BottomProgress.BackgroundTransparency = 1
-						GUIObject.BottomProgress.TextStrokeTransparency = 0
-						GUIObject.BottomProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-						GUIObject.BottomProgress.TextColor3 = Color3.fromRGB(255,255,255)
-						GUIObject.BottomProgress.TextScaled = true
+						BottomLabelClone.Name = "BottomLabel"
+						BottomLabelClone.Text = "Bottom HP: nil"
+						BottomLabelClone.Size = UDim2.new(1,0,0.25,0)
+						BottomLabelClone.Position = UDim2.new(0,0,0.25,0)
+						BottomLabelClone.BackgroundTransparency = 1
+						BottomLabelClone.TextStrokeTransparency = 0
+						BottomLabelClone.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+						BottomLabelClone.TextColor3 = Color3.fromRGB(255,255,255)
+						BottomLabelClone.TextScaled = true
+
+						TopProgressClone.Name = "TopProgress"
+						TopProgressClone.Text = "Top Repair: 0%"
+						TopProgressClone.Size = UDim2.new(1,0,0.25,0)
+						TopProgressClone.Position = UDim2.new(0,0,0.5,0)
+						TopProgressClone.BackgroundTransparency = 1
+						TopProgressClone.TextStrokeTransparency = 0
+						TopProgressClone.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+						TopProgressClone.TextColor3 = Color3.fromRGB(255,255,255)
+						TopProgressClone.TextScaled = true
+
+						BottomProgressClone.Name = "BottomProgress"
+						BottomProgressClone.Text = "Bottom Repair: 0%"
+						BottomProgressClone.Size = UDim2.new(1,0,0.25,0)
+						BottomProgressClone.Position = UDim2.new(0,0,0.75,0)
+						BottomProgressClone.BackgroundTransparency = 1
+						BottomProgressClone.TextStrokeTransparency = 0
+						BottomProgressClone.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+						BottomProgressClone.TextColor3 = Color3.fromRGB(255,255,255)
+						BottomProgressClone.TextScaled = true
 					end
 				end
 			elseif Method == 2 then
@@ -12205,8 +12239,6 @@ function RoClothes(Player)
 				PlayerData[ExecutePlayer.Name].OldestClothings.ShirtGraphic:Clone().Parent = ExecutePlayer.Character
 				PlayerData[ExecutePlayer.Name].OldestClothings.ShirtGraphic = nil
 			end
-			GUIObject.BillboardHP:Destroy()
-			GUIObject.Particle:Destroy()
 		end
 	end
 
@@ -12455,73 +12487,85 @@ function RoClothes(Player)
 					end
 
 				end
+				
+				if Character.Torso:FindFirstChild("BillboardHP") then
+					Character.Torso.BillboardHP:Destroy()
+				end
+				if Character.Torso:FindFirstChild("ParticleEmitter") then
+					Character.Torso.ParticleEmitter:Destroy()
+				end
 
-				GUIObject.Particle = Instance.new("ParticleEmitter",Character.Torso)
-				GUIObject.Particle.Enabled = false
-				GUIObject.Particle.Texture = "rbxassetid://16291625893"
-				GUIObject.Particle.LightEmission = 1
-				GUIObject.Particle.ZOffset = 1
-				GUIObject.Particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
-				GUIObject.Particle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
-				GUIObject.Particle.Lifetime = NumberRange.new(0.5,1)
-				GUIObject.Particle.Rotation = NumberRange.new(-10,10)
-				GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
-				GUIObject.Particle.Speed = NumberRange.new(-1,2)
-				GUIObject.Particle.Drag = 2
+				local CloneParticle = GUIObject.Particle:Clone()
+				CloneParticle.Parent = Character.Torso
+				CloneParticle.Enabled = false
+				CloneParticle.Texture = "rbxassetid://16291625893"
+				CloneParticle.LightEmission = 1
+				CloneParticle.ZOffset = 1
+				CloneParticle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
+				CloneParticle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
+				CloneParticle.Lifetime = NumberRange.new(0.5,1)
+				CloneParticle.Rotation = NumberRange.new(-10,10)
+				CloneParticle.RotSpeed = NumberRange.new(-10,10)
+				CloneParticle.Speed = NumberRange.new(-1,2)
+				CloneParticle.Drag = 2
 
-				GUIObject.BillboardHP = Instance.new("BillboardGui")
-				GUIObject.BillboardHP.Parent = Character
-				GUIObject.BillboardHP.Enabled = PlayerData[Data].DisplayHP
+				local BillboardClone = GUIObject.BillboardHP:Clone()
+				BillboardClone.Parent = Character.Torso
+				BillboardClone.Enabled = PlayerData[Data].DisplayHP
+				BillboardClone.Name = "BillboardHP"
+				BillboardClone.StudsOffset = Vector3.new(5,0,0)
 
-				GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
-				GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
+				local TopLabelClone = GUIObject.TopLabel:Clone()
+				local BottomLabelClone = GUIObject.BottomLabel:Clone()
+				local TopProgressClone = GUIObject.TopProgress:Clone()
+				local BottomProgressClone = GUIObject.BottomProgress:Clone()
 
-				GUIObject.TopProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
-				GUIObject.BottomProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
-				GUIObject.BottomProgress.Visible = false
-				GUIObject.TopProgress.Visible = false
+				TopLabelClone.Parent = BillboardClone
+				BottomLabelClone.Parent = BillboardClone
 
-				GUIObject.BillboardHP.Size = UDim2.new(5,0,5,0)
-				GUIObject.BillboardHP.StudsOffset = Vector3.new(5,0,0)
+				TopProgressClone.Parent = BillboardClone
+				BottomProgressClone.Parent = BillboardClone
+				TopProgressClone.Visible = false
+				BottomProgressClone.Visible = false
 
-				GUIObject.TopLabel.Name = "TopLabel"
-				GUIObject.TopLabel.Text = "Top HP: nil"
-				GUIObject.TopLabel.Size = UDim2.new(1,0,0.25,0)
-				GUIObject.TopLabel.BackgroundTransparency = 1
-				GUIObject.TopLabel.TextStrokeTransparency = 0
-				GUIObject.TopLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-				GUIObject.TopLabel.TextColor3 = Color3.fromRGB(255,255,255)
-				GUIObject.TopLabel.TextScaled = true
+				TopLabelClone.Name = "TopLabel"
+				TopLabelClone.Text = "Top HP: nil"
+				TopLabelClone.Size = UDim2.new(1,0,0.25,0)
+				TopLabelClone.BackgroundTransparency = 1
+				TopLabelClone.TextStrokeTransparency = 0
+				TopLabelClone.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+				TopLabelClone.TextColor3 = Color3.fromRGB(255,255,255)
+				TopLabelClone.TextScaled = true
 
-				GUIObject.BottomLabel.Name = "BottomLabel"
-				GUIObject.BottomLabel.Text = "Bottom HP: nil"
-				GUIObject.BottomLabel.Size = UDim2.new(1,0,0.25,0)
-				GUIObject.BottomLabel.Position = UDim2.new(0,0,0.25,0)
-				GUIObject.BottomLabel.BackgroundTransparency = 1
-				GUIObject.BottomLabel.TextStrokeTransparency = 0
-				GUIObject.BottomLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-				GUIObject.BottomLabel.TextColor3 = Color3.fromRGB(255,255,255)
-				GUIObject.BottomLabel.TextScaled = true
+				BottomLabelClone.Name = "BottomLabel"
+				BottomLabelClone.Text = "Bottom HP: nil"
+				BottomLabelClone.Size = UDim2.new(1,0,0.25,0)
+				BottomLabelClone.Position = UDim2.new(0,0,0.25,0)
+				BottomLabelClone.BackgroundTransparency = 1
+				BottomLabelClone.TextStrokeTransparency = 0
+				BottomLabelClone.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+				BottomLabelClone.TextColor3 = Color3.fromRGB(255,255,255)
+				BottomLabelClone.TextScaled = true
 
-				GUIObject.TopProgress.Name = "TopProgress"
-				GUIObject.TopProgress.Text = "Top Repair: 0%"
-				GUIObject.TopProgress.Size = UDim2.new(1,0,0.25,0)
-				GUIObject.TopProgress.Position = UDim2.new(0,0,0.5,0)
-				GUIObject.TopProgress.BackgroundTransparency = 1
-				GUIObject.TopProgress.TextStrokeTransparency = 0
-				GUIObject.TopProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-				GUIObject.TopProgress.TextColor3 = Color3.fromRGB(255,255,255)
-				GUIObject.TopProgress.TextScaled = true
+				TopProgressClone.Name = "TopProgress"
+				TopProgressClone.Text = "Top Repair: 0%"
+				TopProgressClone.Size = UDim2.new(1,0,0.25,0)
+				TopProgressClone.Position = UDim2.new(0,0,0.5,0)
+				TopProgressClone.BackgroundTransparency = 1
+				TopProgressClone.TextStrokeTransparency = 0
+				TopProgressClone.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+				TopProgressClone.TextColor3 = Color3.fromRGB(255,255,255)
+				TopProgressClone.TextScaled = true
 
-				GUIObject.BottomProgress.Name = "BottomProgress"
-				GUIObject.BottomProgress.Text = "Bottom Repair: 0%"
-				GUIObject.BottomProgress.Size = UDim2.new(1,0,0.25,0)
-				GUIObject.BottomProgress.Position = UDim2.new(0,0,0.75,0)
-				GUIObject.BottomProgress.BackgroundTransparency = 1
-				GUIObject.BottomProgress.TextStrokeTransparency = 0
-				GUIObject.BottomProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-				GUIObject.BottomProgress.TextColor3 = Color3.fromRGB(255,255,255)
-				GUIObject.BottomProgress.TextScaled = true
+				BottomProgressClone.Name = "BottomProgress"
+				BottomProgressClone.Text = "Bottom Repair: 0%"
+				BottomProgressClone.Size = UDim2.new(1,0,0.25,0)
+				BottomProgressClone.Position = UDim2.new(0,0,0.75,0)
+				BottomProgressClone.BackgroundTransparency = 1
+				BottomProgressClone.TextStrokeTransparency = 0
+				BottomProgressClone.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+				BottomProgressClone.TextColor3 = Color3.fromRGB(255,255,255)
+				BottomProgressClone.TextScaled = true
 
 				if OldCharacter:FindFirstChildOfClass("Shirt") then
 					if Character:FindFirstChildOfClass("Shirt") then
@@ -12536,82 +12580,86 @@ function RoClothes(Player)
 					OldCharacter:FindFirstChildOfClass("Pants"):Clone().Parent = Character
 				end
 			elseif Method == 1 then
-				GUIObject.Particle = Instance.new("ParticleEmitter",Player.Character.HumanoidRootPart)
-				GUIObject.Particle.Enabled = false
-				GUIObject.Particle.Texture = "rbxassetid://16291625893"
-				GUIObject.Particle.LightEmission = 1
-				GUIObject.Particle.ZOffset = 1
-				GUIObject.Particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
-				GUIObject.Particle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
-				GUIObject.Particle.Lifetime = NumberRange.new(0.5,1)
-				GUIObject.Particle.Rotation = NumberRange.new(-10,10)
-				GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
-				GUIObject.Particle.Speed = NumberRange.new(-1,2)
-				GUIObject.Particle.Drag = 2
+				
+				if Character.Torso:FindFirstChild("BillboardHP") then
+					Character.Torso.BillboardHP:Destroy()
+				end
+				if Character.Torso:FindFirstChild("ParticleEmitter") then
+					Character.Torso.ParticleEmitter:Destroy()
+				end
 
-				GUIObject.Particle = Instance.new("ParticleEmitter",Character.Torso)
-				GUIObject.Particle.Enabled = false
-				GUIObject.Particle.Texture = "rbxassetid://16291625893"
-				GUIObject.Particle.LightEmission = 1
-				GUIObject.Particle.ZOffset = 1
-				GUIObject.Particle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
-				GUIObject.Particle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
-				GUIObject.Particle.Lifetime = NumberRange.new(0.5,1)
-				GUIObject.Particle.Rotation = NumberRange.new(-10,10)
-				GUIObject.Particle.RotSpeed = NumberRange.new(-10,10)
-				GUIObject.Particle.Speed = NumberRange.new(-1,2)
-				GUIObject.Particle.Drag = 2
+				
+				local CloneParticle = GUIObject.Particle:Clone()
+				CloneParticle.Parent = Character.Torso
+				CloneParticle.Enabled = false
+				CloneParticle.Texture = "rbxassetid://16291625893"
+				CloneParticle.LightEmission = 1
+				CloneParticle.ZOffset = 1
+				CloneParticle.Size = NumberSequence.new({NumberSequenceKeypoint.new(0,0),NumberSequenceKeypoint.new(1,.5)})
+				CloneParticle.Transparency = NumberSequence.new({NumberSequenceKeypoint.new(0,1),NumberSequenceKeypoint.new(0.5,0),NumberSequenceKeypoint.new(1,1)})
+				CloneParticle.Lifetime = NumberRange.new(0.5,1)
+				CloneParticle.Rotation = NumberRange.new(-10,10)
+				CloneParticle.RotSpeed = NumberRange.new(-10,10)
+				CloneParticle.Speed = NumberRange.new(-1,2)
+				CloneParticle.Drag = 2
 
-				GUIObject.BillboardHP = Instance.new("BillboardGui",Character:FindFirstChild("HumanoidRootPart"))
-				GUIObject.BillboardHP.Enabled = PlayerData[Data].DisplayHP
+				local BillboardClone = GUIObject.BillboardHP:Clone()
+				BillboardClone.Parent = Character.Torso
+				BillboardClone.Enabled = PlayerData[Data].DisplayHP
+				BillboardClone.Name = "BillboardHP"
+				BillboardClone.StudsOffset = Vector3.new(5,0,0)
 
-				GUIObject.TopLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
-				GUIObject.BottomLabel = Instance.new("TextLabel",GUIObject.BillboardHP)
+				local TopLabelClone = GUIObject.TopLabel:Clone()
+				local BottomLabelClone = GUIObject.BottomLabel:Clone()
+				local TopProgressClone = GUIObject.TopProgress:Clone()
+				local BottomProgressClone = GUIObject.BottomProgress:Clone()
 
-				GUIObject.TopProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
-				GUIObject.BottomProgress = Instance.new("TextLabel",GUIObject.BillboardHP)
+				TopLabelClone.Parent = BillboardClone
+				BottomLabelClone.Parent = BillboardClone
 
-				GUIObject.BillboardHP.Size = UDim2.new(5,0,5,0)
-				GUIObject.BillboardHP.StudsOffset = Vector3.new(5,0,0)
+				TopProgressClone.Parent = BillboardClone
+				BottomProgressClone.Parent = BillboardClone
+				TopProgressClone.Visible = false
+				BottomProgressClone.Visible = false
 
-				GUIObject.TopLabel.Name = "TopLabel"
-				GUIObject.TopLabel.Text = "Top HP: nil"
-				GUIObject.TopLabel.Size = UDim2.new(1,0,0.25,0)
-				GUIObject.TopLabel.BackgroundTransparency = 1
-				GUIObject.TopLabel.TextStrokeTransparency = 0
-				GUIObject.TopLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-				GUIObject.TopLabel.TextColor3 = Color3.fromRGB(255,255,255)
-				GUIObject.TopLabel.TextScaled = true
+				TopLabelClone.Name = "TopLabel"
+				TopLabelClone.Text = "Top HP: nil"
+				TopLabelClone.Size = UDim2.new(1,0,0.25,0)
+				TopLabelClone.BackgroundTransparency = 1
+				TopLabelClone.TextStrokeTransparency = 0
+				TopLabelClone.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+				TopLabelClone.TextColor3 = Color3.fromRGB(255,255,255)
+				TopLabelClone.TextScaled = true
 
-				GUIObject.BottomLabel.Name = "BottomLabel"
-				GUIObject.BottomLabel.Text = "Bottom HP: nil"
-				GUIObject.BottomLabel.Size = UDim2.new(1,0,0.25,0)
-				GUIObject.BottomLabel.Position = UDim2.new(0,0,0.25,0)
-				GUIObject.BottomLabel.BackgroundTransparency = 1
-				GUIObject.BottomLabel.TextStrokeTransparency = 0
-				GUIObject.BottomLabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
-				GUIObject.BottomLabel.TextColor3 = Color3.fromRGB(255,255,255)
-				GUIObject.BottomLabel.TextScaled = true
+				BottomLabelClone.Name = "BottomLabel"
+				BottomLabelClone.Text = "Bottom HP: nil"
+				BottomLabelClone.Size = UDim2.new(1,0,0.25,0)
+				BottomLabelClone.Position = UDim2.new(0,0,0.25,0)
+				BottomLabelClone.BackgroundTransparency = 1
+				BottomLabelClone.TextStrokeTransparency = 0
+				BottomLabelClone.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+				BottomLabelClone.TextColor3 = Color3.fromRGB(255,255,255)
+				BottomLabelClone.TextScaled = true
 
-				GUIObject.TopProgress.Name = "TopProgress"
-				GUIObject.TopProgress.Text = "Top Repair: 0%"
-				GUIObject.TopProgress.Size = UDim2.new(1,0,0.25,0)
-				GUIObject.TopProgress.Position = UDim2.new(0,0,0.5,0)
-				GUIObject.TopProgress.BackgroundTransparency = 1
-				GUIObject.TopProgress.TextStrokeTransparency = 0
-				GUIObject.TopProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-				GUIObject.TopProgress.TextColor3 = Color3.fromRGB(255,255,255)
-				GUIObject.TopProgress.TextScaled = true
+				TopProgressClone.Name = "TopProgress"
+				TopProgressClone.Text = "Top Repair: 0%"
+				TopProgressClone.Size = UDim2.new(1,0,0.25,0)
+				TopProgressClone.Position = UDim2.new(0,0,0.5,0)
+				TopProgressClone.BackgroundTransparency = 1
+				TopProgressClone.TextStrokeTransparency = 0
+				TopProgressClone.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+				TopProgressClone.TextColor3 = Color3.fromRGB(255,255,255)
+				TopProgressClone.TextScaled = true
 
-				GUIObject.BottomProgress.Name = "BottomProgress"
-				GUIObject.BottomProgress.Text = "Bottom Repair: 0%"
-				GUIObject.BottomProgress.Size = UDim2.new(1,0,0.25,0)
-				GUIObject.BottomProgress.Position = UDim2.new(0,0,0.75,0)
-				GUIObject.BottomProgress.BackgroundTransparency = 1
-				GUIObject.BottomProgress.TextStrokeTransparency = 0
-				GUIObject.BottomProgress.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-				GUIObject.BottomProgress.TextColor3 = Color3.fromRGB(255,255,255)
-				GUIObject.BottomProgress.TextScaled = true
+				BottomProgressClone.Name = "BottomProgress"
+				BottomProgressClone.Text = "Bottom Repair: 0%"
+				BottomProgressClone.Size = UDim2.new(1,0,0.25,0)
+				BottomProgressClone.Position = UDim2.new(0,0,0.75,0)
+				BottomProgressClone.BackgroundTransparency = 1
+				BottomProgressClone.TextStrokeTransparency = 0
+				BottomProgressClone.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+				BottomProgressClone.TextColor3 = Color3.fromRGB(255,255,255)
+				BottomProgressClone.TextScaled = true
 			end
 			--hi
 			if Bundle[DataDetail.CurrentBundle]["TClothes"] then
@@ -13432,17 +13480,37 @@ function RoClothes(Player)
 			hpKeybindDetect = false
 		else
 			if Keycode.KeyCode == (hpKEYBIND or hpKEYBINDMobile) and cd == false then
-
 				local LP = game:GetService("Players").LocalPlayer
 				local data = PlayerData[LP.Name]
+				
+				local c = game:GetService("Players").LocalPlayer.Character
+				if Method == 2 and Method2CharacterFolder:FindFirstChild(LP.Name) then
+					c = Method2CharacterFolder[LP.Name]
+				else
+					c = game:GetService("Players").LocalPlayer.Character
+				end
+
+
 				if LP.Character and LP.Character.Humanoid and data 
 					and data["HardcoreHP"] == true and (data["TopHP"] ~= "" or data["BottomHP"] ~= "") then
 					if data["Healing"] == false then
 						data["Healing"] = true
-						GUIObject.Particle.Enabled = true
+						c.Torso.ParticleEmitter.Enabled = true
 
-						GUIObject.BottomProgress.Visible = true
-						GUIObject.TopProgress.Visible = true
+						c.Torso.BillboardHP.BottomProgress.Visible = true
+						c.Torso.BillboardHP.TopProgress.Visible = true
+						
+						if data["SavedTopHP"] >= data["TopHP"] then
+							c.Torso.BillboardHP.TopProgress.Text = "Top is fixed!"
+						else	
+							c.Torso.BillboardHP.TopProgress.Text = "Waiting for repair..."
+						end
+
+						if data["SavedBottomHP"] >= data["BottomHP"] then
+							c.Torso.BillboardHP.BottomProgress.Text = "Bottom is fixed!"
+						else	
+							c.Torso.BillboardHP.BottomProgress.Text = "Waiting for repair..."
+						end
 
 						cd = true
 						tap = true
@@ -13453,45 +13521,31 @@ function RoClothes(Player)
 							local healTime = 0
 							local timeAccumulated = 0
 							local totalTime = 0
-							
-							
-							if data["SavedTopHP"] >= data["TopHP"] then
-								GUIObject.TopProgress.Text = "Top is fixed!"
-							else	
-								GUIObject.TopProgress.Text = "Waiting for repair..."
-							end
-							
-							if data["SavedBottomHP"] >= data["BottomHP"] then
-								GUIObject.BottomProgress.Text = "Bottom is fixed!"
-							else	
-								GUIObject.BottomProgress.Text = "Waiting for repair..."
-							end
-							
-							
 							if data["TopHP"] ~= "" then
-								healTime += (data["TopHP"]/math.max(data["SavedTopHP"],1))*0.03
+								healTime += (data["TopHP"]-data["SavedTopHP"])*0.02
 							end
 							if data["BottomHP"] ~= "" then
-								healTime += (data["BottomHP"]/math.max(data["SavedBottomHP"],1))*0.03
+								healTime += (data["BottomHP"]-data["SavedBottomHP"])*0.02
 							end
 							repeat
 								if LP.Character.Humanoid.Health < data["SavedPreviousHP"] then
 									data["Healing"] = false
-									GUIObject.Particle.Enabled = false
 
-									GUIObject.BottomProgress.Visible = false
-									GUIObject.TopProgress.Visible = false
+									c.Torso.ParticleEmitter.Enabled = false
+
+									c.Torso.BillboardHP.BottomProgress.Visible = false
+									c.Torso.BillboardHP.TopProgress.Visible = false
 								end
 								local focus
 								local timeRequired
 								if data["BottomHP"] ~= "" and (data["SavedBottomHP"] <= 0 or data["SavedTopHP"]/data["TopHP"] >= data["SavedBottomHP"]/data["BottomHP"]) then
 									focus = "BottomHP"
-									timeRequired = (data["BottomHP"]-data["SavedBottomHP"])*0.03
-									GUIObject.BottomProgress.Text = "Bottom repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
+									timeRequired = (data["BottomHP"]-data["SavedBottomHP"])*0.02
+									c.Torso.BillboardHP.BottomProgress.Text = "Bottom repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
 								elseif data["TopHP"] ~= "" and (data["SavedTopHP"] <= 0 or data["SavedTopHP"]/data["TopHP"] < data["SavedBottomHP"]/data["BottomHP"]) then
 									focus = "TopHP"
-									timeRequired = (data["TopHP"]-data["SavedTopHP"])*0.03
-									GUIObject.TopProgress.Text = "Top repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
+									timeRequired = (data["TopHP"]-data["SavedTopHP"])*0.02
+									c.Torso.BillboardHP.TopProgress.Text = "Top repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
 								end
 								local t = task.wait()
 								timeAccumulated += t
@@ -13501,10 +13555,8 @@ function RoClothes(Player)
 									timeAccumulated = 0
 									if focus == "TopHP" then
 										data["SavedTopHP"]=data["TopHP"]
-										GUIObject.TopProgress.Text = "Top repaired!" 
 									else
 										data["SavedBottomHP"]=data["BottomHP"]
-										GUIObject.BottomProgress.Text = "Bottom repaired!"
 									end
 								end
 							until data["Healing"] == false
@@ -13522,12 +13574,21 @@ function RoClothes(Player)
 			local LP = game:GetService("Players").LocalPlayer
 			local data = PlayerData[LP.Name]
 			if LP.Character and LP.Character.Humanoid and data and data["HardcoreHP"] == true then
+				local LP = game:GetService("Players").LocalPlayer
+				local data = PlayerData[LP.Name]
+
+				local c = game:GetService("Players").LocalPlayer.Character
+				if Method == 2 and Method2CharacterFolder:FindFirstChild(LP.Name) then
+					c = Method2CharacterFolder[LP.Name]
+				else
+					c = game:GetService("Players").LocalPlayer.Character
+				end
 				if data["Healing"] == true then
 					data["Healing"] = false
-					GUIObject.Particle.Enabled = false
+					c.Torso.ParticleEmitter.Enabled = false
 
-					GUIObject.BottomProgress.Visible = false
-					GUIObject.TopProgress.Visible = false
+					c.Torso.BillboardHP.BottomProgress.Visible = false
+					c.Torso.BillboardHP.TopProgress.Visible = false
 					cd = true
 					task.delay(2, function()
 						cd = false
@@ -14172,27 +14233,33 @@ function RoClothes(Player)
 							else
 								PData.SavedBottomHP = 0
 							end
-							GUIObject.TopLabel.Text = "Top HP:" .. math.floor(PData.SavedTopHP) .. "/" .. PData.TopHP
-							GUIObject.BottomLabel.Text = "Bottom HP:" .. math.floor(PData.SavedBottomHP) .. "/" .. PData.BottomHP
+							if c.Torso:FindFirstChild("BillboardHP") then
+								c.Torso.BillboardHP.TopLabel.Text = "Top HP:" .. math.floor(PData.SavedTopHP) .. "/" .. PData.TopHP
+								c.Torso.BillboardHP.BottomLabel.Text = "Bottom HP:" .. math.floor(PData.SavedBottomHP) .. "/" .. PData.BottomHP
+							end
 						elseif PData.HardcoreHP == false then
 							if PData.TopHP ~= "" then
 								if (h.MaxHealth-h.Health) >= PData.TopHP then
-									GUIObject.TopLabel.Text = "Top HP: 0 /" .. PData.TopHP
+									if c.Torso:FindFirstChild("BillboardHP") then
+										c.Torso.BillboardHP.TopLabel.Text = "Top HP: 0 /" .. PData.TopHP
+									end
 								else
-									GUIObject.TopLabel.Text = "Top HP: " .. math.floor(PData.TopHP - (h.MaxHealth-h.Health)) .. "/" .. PData.TopHP
+									if c.Torso:FindFirstChild("BillboardHP") then
+										c.Torso.BillboardHP.TopLabel.Text = "Top HP: " .. math.floor(PData.TopHP - (h.MaxHealth-h.Health)) .. "/" .. PData.TopHP
+									end
 								end
-							else
-								GUIObject.TopLabel.Visible = false
 							end
 
 							if PData.BottomHP ~= "" then
 								if (h.MaxHealth-h.Health) >= PData.BottomHP then
-									GUIObject.BottomLabel.Text = "Bottom HP: 0/" .. PData.BottomHP
+									if c.Torso:FindFirstChild("BillboardHP") then
+										c.Torso.BillboardHP.BottomLabel.Text = "Bottom HP: 0/" .. PData.BottomHP
+									end	
 								else
-									GUIObject.BottomLabel.Text = "Bottom HP: " .. math.floor(PData.BottomHP - (h.MaxHealth-h.Health)) .. "/" .. PData.BottomHP
+									if c.Torso:FindFirstChild("BillboardHP") then
+										c.Torso.BillboardHP.BottomLabel.Text = "Bottom HP: " .. math.floor(PData.BottomHP - (h.MaxHealth-h.Health)) .. "/" .. PData.BottomHP
+									end
 								end
-							else
-								GUIObject.BottomLabel.Visible = false
 							end
 						end
 						if PData.DamageSFX ~= "" and h.Health < PData.SavedPreviousHP then
@@ -18071,7 +18138,7 @@ function RoClothes(Player)
 				GUIObject.Screen:Destroy()
 				GUIObject.MobileCloseButtonScreen:Destroy()
 				BreakerObject:Destroy()
-				GUIObject.BillboardHP:Destroy()
+
 				warn("RoClothes Disconnected")
 				break
 			end
