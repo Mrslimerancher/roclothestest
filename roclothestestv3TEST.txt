@@ -8254,8 +8254,8 @@ function RoClothes(Player)
 				TorsoType = 9,
 				ArmType = 3,
 				LegsType = 4,
-				TopHP = 100,
-				BottomHP = 50,
+				TopHP = 380,
+				BottomHP = 140,
 				HPClothes = {
 					Shirt = "14653358073",
 					Pants = "12464125930",
@@ -8295,15 +8295,15 @@ function RoClothes(Player)
 				TorsoType = 9,
 				ArmType = 3,
 				LegsType = 4,
-				TopHP = 150,
-				BottomHP = 100,
+				TopHP = 700,
+				BottomHP = 500,
 				CatalogClothes = {
-					Shirt = "",
+					Shirt = "10235767371",
 					Pants = "",
 					ShirtGraphic = "",
 				},
 				HPClothes = {
-					Shirt = "14653358073",
+					Shirt = "215218121",
 					Pants = "12464125930",
 				},
 				ButtType = 1,
@@ -8312,7 +8312,7 @@ function RoClothes(Player)
 				HealParticles = true,
 				HardcoreHP = true,
 				DisplayHP = true,
-				DamageSFX = 1,
+				DamageSFX = "0",
 				Volume = 1,
 			},
 			["IsPreset"] = true,
@@ -8341,10 +8341,10 @@ function RoClothes(Player)
 				TorsoType = 9,
 				ArmType = 3,
 				LegsType = 4,
-				TopHP = 75,
-				BottomHP = 50,
+				TopHP = 140,
+				BottomHP = 70,
 				CatalogClothes = {
-					Shirt = "14653358073",
+					Shirt = "215218121",
 					Pants = "12464125930",
 					ShirtGraphic = "",
 				},
@@ -8356,7 +8356,7 @@ function RoClothes(Player)
 				Tone = "Dark",
 				TearParticles = true,
 				HealParticles = true,
-				HardcoreHP = true,
+				HardcoreHP = false,
 				DisplayHP = true,
 				DamageSFX = 1,
 				Volume = 1,
@@ -13518,7 +13518,7 @@ function RoClothes(Player)
 							if data["BottomHP"] ~= "" then
 								healTime += (data["BottomHP"]-data["SavedBottomHP"])*0.02
 							end
-							
+
 							if data["TopHP"] ~= "" then
 								if data["SavedTopHP"] >= data["TopHP"] then
 									c.Torso.BillboardHP.TopProgress.Text = "Top is repaired!"
@@ -13526,7 +13526,7 @@ function RoClothes(Player)
 									c.Torso.BillboardHP.TopProgress.Text = "Waiting for repair..."
 								end
 							end
-							
+
 							if data["BottomHP"] ~= "" then
 								if data["SavedBottomHP"] >= data["BottomHP"] then
 									c.Torso.BillboardHP.BottomProgress.Text = "Bottom is repaired!"
@@ -13555,12 +13555,12 @@ function RoClothes(Player)
 									timeRequired = (data["TopHP"]-data["SavedTopHP"])*0.03
 									c.Torso.BillboardHP.TopProgress.Text = "Top repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
 								end
-								
+
 								local t = task.wait()
 								timeAccumulated += t
 								totalTime += t
 								-- TODO: u gotta add a progress bar & thingy to show hp
-								if timeAccumulated >= timeRequired then
+								if timeAccumulated >= timeRequired+1 then
 									timeAccumulated = 0
 									if focus == "TopHP" then
 										data["SavedTopHP"]=data["TopHP"]
@@ -14246,12 +14246,18 @@ function RoClothes(Player)
 							end
 							if c.Torso:FindFirstChild("BillboardHP") then
 								if PData.TopHP ~= "" then
+									if PData.SavedTopHP <= 0 then
+										c.Torso.BillboardHP.TopLabel.Text = "Top STRIPPED!"
+									end
 									c.Torso.BillboardHP.TopLabel.Text = "Top HP:" .. math.floor(PData.SavedTopHP) .. "/" .. PData.TopHP
 									c.Torso.BillboardHP.TopLabel.Visible = true
 								else
 									c.Torso.BillboardHP.TopLabel.Visible = false
 								end
 								if PData.BottomHP ~= "" then
+									if PData.SavedBottomHP <= 0 then
+										c.Torso.BillboardHP.BottomLabel.Text = "Bottom STRIPPED!"
+									end
 									c.Torso.BillboardHP.BottomLabel.Text = "Bottom HP:" .. math.floor(PData.SavedBottomHP) .. "/" .. PData.BottomHP
 									c.Torso.BillboardHP.BottomLabel.Visible = true
 								else
@@ -14263,7 +14269,7 @@ function RoClothes(Player)
 								if (h.MaxHealth-h.Health) >= PData.TopHP then
 									if c.Torso:FindFirstChild("BillboardHP") then
 										if PData.TopHP then
-											c.Torso.BillboardHP.TopLabel.Text = "Top HP: 0 /" .. PData.TopHP
+											c.Torso.BillboardHP.TopLabel.Text = "Top STRIPPED!" 
 										end
 									end
 								else
@@ -14276,7 +14282,7 @@ function RoClothes(Player)
 							if PData.BottomHP ~= "" then
 								if (h.MaxHealth-h.Health) >= PData.BottomHP then
 									if c.Torso:FindFirstChild("BillboardHP") then
-										c.Torso.BillboardHP.BottomLabel.Text = "Bottom HP: 0/" .. PData.BottomHP
+										c.Torso.BillboardHP.BottomLabel.Text = "Bottom STRIPPED!"
 									end	
 								else
 									if c.Torso:FindFirstChild("BillboardHP") then
