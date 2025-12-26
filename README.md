@@ -1,7 +1,8 @@
-# roclothestest 0.7.71*
+# roclothestest 0.7.81*
 this is for roblox stuff okay
 
 *tried adding some QOL such as ripped shirt id working, and the thing below
+# ATTEMPTING TO IMPORT 7.72 STUFF INTO 7.81
 
 0.7.72 added hp clothes display + progress, repair clothes for mobile is very scuffed (also keybind for pc is \)
 
