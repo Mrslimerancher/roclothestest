@@ -1,9 +1,10 @@
 --[[	
 
 	/ ＲＯＣＬＯＴＨＥＳ
-	Version - 0.7.8:lerp()
+	Version - 0.7.8.1:lerp()
 	Mod's Discord - discord.gg/k2HbJMY6Fr
 	Unknowing's Discord - discord.gg/HBzvWE6Rp3
+	Modified by ME!!!!
 	
 	| This script requires a LOCAL folder "RClothesContent" to be added in ROBLOX's content folder, or it'll self-destruct itself
 	
@@ -486,7 +487,7 @@ function RoClothes(Player)
 	local TS = game:GetService("TweenService")
 	local MPS = game:GetService("MarketplaceService")
 
-	local CVersion = "0.7.8:lerp()"
+	local CVersion = "0.7.8.1:lerp()"
 
 	local loadupBundle = nil -- replace this with a bundle name to automatically load it up on execute
 	local loadupExecute = false
@@ -14082,14 +14083,14 @@ function RoClothes(Player)
 
 		if Character then
 			local Goop = Method2CharacterFolder:FindFirstChild(Data)
-			
+
 			if Character.HumanoidRootPart:FindFirstChild("BillboardHP") then
 				Character.HumanoidRootPart.BillboardHP:Destroy()
 			end
 			if Character.HumanoidRootPart:FindFirstChild("ParticleEmitter") then
 				Character.HumanoidRootPart.ParticleEmitter:Destroy()
 			end
-			
+
 			if Goop then
 				if Goop.HumanoidRootPart:FindFirstChild("BillboardHP") then
 					Goop.HumanoidRootPart.BillboardHP:Destroy()
@@ -14475,7 +14476,7 @@ function RoClothes(Player)
 				LEFTBUTT = Function.Weld(PartListData["Left Butt".. DataDetail.ButtType], Character, Extra, Data)
 				RIGHTBUTT = Function.Weld(PartListData["Right Butt".. DataDetail.ButtType], Character, Extra, Data)
 			end
-			
+
 			if Character.HumanoidRootPart:FindFirstChild("BillboardHP") then
 				Character.HumanoidRootPart.BillboardHP:Destroy()
 			end
@@ -15233,7 +15234,7 @@ function RoClothes(Player)
 					and data["HardcoreHP"] == true and (data["TopHP"] ~= "" or data["BottomHP"] ~= "") then
 					if data["Healing"] == false then
 						data["Healing"] = true
-						
+
 						if PlayerData[LP.Name].Character.HumanoidRootPart:FindFirstChild("ParticleEmitter") then
 							PlayerData[LP.Name].Character.HumanoidRootPart.ParticleEmitter.Enabled = true
 							PlayerData[LP.Name].Character.HumanoidRootPart.BillboardHP.BottomProgress.Visible = true
@@ -15243,7 +15244,7 @@ function RoClothes(Player)
 							Method2CharacterFolder[Player.Name].HumanoidRootPart.BillboardHP.BottomProgress.Visible = true
 							Method2CharacterFolder[Player.Name].HumanoidRootPart.BillboardHP.TopProgress.Visible = true
 						end
-						
+
 						cd = true
 						tap = true
 						task.wait(.25)
@@ -15253,14 +15254,14 @@ function RoClothes(Player)
 							local healTime = 0
 							local timeAccumulated = 0
 							local totalTime = 0
-							
+
 							if data["TopHP"] ~= "" then
 								healTime += (data["TopHP"]-data["SavedTopHP"])*0.02
 							end
 							if data["BottomHP"] ~= "" then
 								healTime += (data["BottomHP"]-data["SavedBottomHP"])*0.02
 							end
-							
+
 							if data["TopHP"] ~= "" then
 								if data["SavedTopHP"] >= data["TopHP"] then
 									if PlayerData[LP.Name].Character.HumanoidRootPart:FindFirstChild("ParticleEmitter") then
@@ -15276,7 +15277,7 @@ function RoClothes(Player)
 									end
 								end
 							end
-							
+
 							if data["BottomHP"] ~= "" then
 								if data["SavedBottomHP"] >= data["BottomHP"] then
 									if PlayerData[LP.Name].Character.HumanoidRootPart:FindFirstChild("ParticleEmitter") then
@@ -15292,7 +15293,7 @@ function RoClothes(Player)
 									end
 								end
 							end
-							
+
 							repeat
 								if LP.Character.Humanoid.Health < data["SavedPreviousHP"] then
 									data["Healing"] = false
@@ -15302,7 +15303,7 @@ function RoClothes(Player)
 								if data["BottomHP"] ~= "" and (data["SavedBottomHP"] <= 0 or data["SavedTopHP"]/data["TopHP"] >= data["SavedBottomHP"]/data["BottomHP"]) then
 									focus = "BottomHP"
 									timeRequired = (data["BottomHP"]-data["SavedBottomHP"])*0.03
-										
+
 									if PlayerData[LP.Name].Character.HumanoidRootPart:FindFirstChild("ParticleEmitter") then
 										PlayerData[LP.Name].Character.HumanoidRootPart.BillboardHP.BottomProgress.Text = "Bottom repair: " .. math.floor((timeAccumulated/timeRequired)*100) .. "%"
 									elseif Method2CharacterFolder:FindFirstChild(Player.Name).HumanoidRootPart:FindFirstChild("ParticleEmitter") then
@@ -15936,7 +15937,7 @@ function RoClothes(Player)
 										end
 									end
 								end
-								
+
 								if PData.DamageSFX ~= "" and h.Health < PData.SavedPreviousHP then
 									if (PData.SavedPreviousHP-h.Health) >= tonumber(PData.DamageSFX) and PData.DamageSFX then
 										if UIS.KeyboardEnabled then
